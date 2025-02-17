@@ -28,9 +28,9 @@ El proyecto esta estructurado en 3 carpetas principales:
 2. productionfiles: Esta carpeta almacena todos los archivos CSS y JS necesarios para el funcionamiento y estilizado en la ejecucuion del servidor para la visualizacion de la pagina. Para mayor entendimiento de esta carpeta vease el punto e de carpetas.
 3. sm_ads: Esta carpeta cumple con el funcionamiento de ser la app de Django dentro del proyecto. Dentro de esta carpeta se almacena todo lo referente a la ejecucion y funcionamiento en cuanto a los urls de la pagina web asi como documentos HTML y todo lo relacionado con la ejecucion de codigo python dentro de los documentos HTML. Tambien como es que se reciben y se pasan datos de la base de datos al Frontend.
 ##### Documentos adicionales
-service_queries es documento donde se almacenan los queries de servicio para mostrar los datos relevantes en la pagina.
-manage.py es documento utilizado para la ejecucion, modificacion y recopilacion de diferentes documentos asi como modificaciones en el proyecto.
-requirements es el documento donde se almacenan los modulos que se requieren en el venv para poder ejecutar el proyecto sin errores.
+service_queries es documento donde se almacenan los queries de servicio para mostrar los datos relevantes en la pagina.   
+manage.py es documento utilizado para la ejecucion, modificacion y recopilacion de diferentes documentos asi como modificaciones en el proyecto.   
+requirements es el documento donde se almacenan los modulos que se requieren en el venv para poder ejecutar el proyecto sin errores.   
 
 #### Views, URLs, Models
 
