@@ -5,7 +5,7 @@ Dataset: Obtained from Kaggle, social media use
 ## Tabla de contenido
 1. [Introduccion](#introduccion)
 2. [Informacion general](#Informacion-general)
-3. [Estructura del proyecto](#Estructura-del-proyecto)
+3. [Estructura del proyecto](#Estructura-del-proyecto)    
 	a. [Carpetas](#carpetas)   
 	b. [Views, URLs, Models](#Views,-URLs,-Models)   
 	c. [Estructura de la BD](#Estructura-de-la-BD)   
