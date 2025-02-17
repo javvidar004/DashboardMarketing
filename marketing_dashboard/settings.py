@@ -11,9 +11,11 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import mimetypes
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+mimetypes.add_type("text/css", ".css", True)
 
 
 # Quick-start development settings - unsuitable for production
@@ -78,7 +80,7 @@ WSGI_APPLICATION = 'marketing_dashboard.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'socialmedieuse',
+        'NAME': 'socialmediause',
         'USER': 'root',
         'PASSWORD': 'admin',
         'HOST':'127.0.0.1',
