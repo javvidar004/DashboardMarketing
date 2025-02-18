@@ -5,7 +5,8 @@ Dataset: Obtained from Kaggle, social media use
 ## Tabla de contenido
 1. [Introduccion](#introduccion)
 2. [Informacion general](#Informacion-general)
-3. [Estructura del proyecto](#Estructura-del-proyecto)    
+3. [¿Como ejecutar el proyecto?](#¿Como-ejecutar-el-proyecto?)
+4. [Estructura del proyecto](#Estructura-del-proyecto)    
 	a. [Carpetas](#carpetas)   
 	b. [Views, URLs, Models](#Views,-URLs,-Models)   
 	c. [Estructura de la BD](#Estructura-de-la-BD)   
@@ -13,14 +14,19 @@ Dataset: Obtained from Kaggle, social media use
 	e. [WhiteNoise para CSS y JS](#WhiteNoise-para-CSS-y-JS)   
 	f. [Queries de Servicio](#Queries-de-Servicio)   
 	g. [Creacion de Graficas](#Creacion-de-Graficas)   
-5. [¿Como ejecutar el proyecto?](#¿Como-ejecutar-el-proyecto?)
-6. [Conclusiones](#conclusiones)
+5. [Conclusiones](#conclusiones)
 ### Introduccion
 
 ***
 ### Informacion general
 El proyecto esta construido a partir del proyecto de generar un Dashboard conectando Frontend con Backend. Debido a la simplicidad de concetar la base de datos con el Frontend utilizamos Django basado en python para generar la conexion asi como toda la estructura de la pagina WEB. Para fines de pryecto y de la simplicidad de la produccion se obtuvo una plantilla con documentos HTML, CSS y JS. Simplemente hubo que adapatarlo a las preferencias del proyecto asi como a la forma de trabajar con Django ya que la estructura de carpetas para el proyecto debe seguir una estructura especifica.
 ***
+
+## ¿Como ejecutar el proyecto?
+
+```CMD
+py manage.py runserver
+```
 ## Estructura del proyecto
 #### carpetas
 El proyecto esta estructurado en 3 carpetas principales:
@@ -55,12 +61,6 @@ SELECT * FROM *;
 #### Creacion de Graficas
 
 
-
-## ¿Como ejecutar el proyecto?
-
-```CMD
-py manage.py runserver
-```
 
 ## Conclusiones
 Esta quedando muy bonito
