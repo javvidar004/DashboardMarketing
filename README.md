@@ -25,6 +25,7 @@ El proyecto esta construido a partir del proyecto de generar un Dashboard conect
 ## ¿Como ejecutar el proyecto?
 Primero descarga el proyecto. Segundo entra a CMD o lineas de comandos, de ahi viaja por las carpetas hasta encontrarte en el directorio de la carpeta del proyecto, donde si ejecutas el comando dir(en Windows) o ls(en linux o Mac) debe aparecer el archivo manage.py junto con las carpetas: marketing_dashboard, productionfiles y sm_ads.
 Una vez en el directorio se debe ejectuar los siguientes comandos.  
+La primera vez ejecutando el proyecto:  
 Para Windows:  
 ```CMD
 py -m venv dashboardenv
@@ -39,11 +40,14 @@ cd Scripts
 ```CMD
 activate.bat
 ```
-Después se debe regresar al directorio del inicio, se puede regresar del directorio con el siguiente comando:
+Después se debe regresar al directorio del inicio, se puede regresar al directorio con el siguiente comando ejecutado dos veces:
 ```CMD
 cd..
 ```
-
+Una vez estando de vuelta en el dirctorio se debe ejecutar el siguiente comando:
+```CMD
+pip install -r requirements.txt
+```
 ## Estructura del proyecto
 #### carpetas
 El proyecto esta estructurado en 3 carpetas principales:
