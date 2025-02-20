@@ -51,6 +51,7 @@ Una vez estando de vuelta en el dirctorio se debe ejecutar el siguiente comando:
 pip install -r requirements.txt
 ```
 ejecutar la siguiente linea de codigo:
+Para poder ejecutar el siguiente comando ya es necesario tener activo el servidor con la base de datos, ya que se haran ciertas modificaciones a la base de datos.
 ```CMD
 py manage.py makemigrations sm_ads
 ```
@@ -81,6 +82,37 @@ manage.py es documento utilizado para la ejecucion, modificacion y recopilacion 
 requirements es el documento donde se almacenan los modulos que se requieren en el venv para poder ejecutar el proyecto sin errores.   
 
 #### Views, URLs, Models
+##### Models:
+El documento Models almacena los modelos de la aplicacion. Estos se construyen a partir de la base de datos, cada modelo representa un registro de cada una de las tablas distintas. Por lo que si se analiza a detalle cada uno de los modelos es el diccionario completo de la base de datos.   
+Este documento ya no es necesario modificar en caso de ser necesario habria que cambiar algo en la base de datos.  
+##### Views:
+En View se encuentran las funciones que se ejecutan detrás de cada uno de los URLs que se llaman cuando es en ejecucion el servidor.  
+Dentro de cada funcion primero se debe otener el template que es el documento HTML a partir del cual se estructurara la pagina.
+```python
+template = loader.get_template('<NOMBRE DEL DOCUMENTO>.html')
+```
+Despues se tiene la linea de codigo para ejecutar el query a la base de datos para que de esta manera, se puedan usar los datos obtenidas en la visualizacion de la pagina.  
+Cabe resaltar que dentro del select se tiene que mantener la llave primaria del modelo, por lo que se pueden ejecutar queries pero siempre con la restriccion de mantener la llave primaria. De esta manera se ejecutaran los queries de servicio.  
+```python
+variable = Nombre_Modelo.objects.raw("query")
+```
+Tras obtener los datos de la base, se deben pasar de la siguiente manera en context que serán todos los datos que se pueden utilizar dentro de la pagina WEB.
+
+```python
+context = {
+    'nombre': variable,
+    'nombre2': variable2,
+    ...
+  }
+```
+Se pueden pasar tantos datos como sena necesarios al context, asi como tambien se pueden ejecutar la cantidad de consultas necesarias a la base de datos.   
+Por ultimo se ejecuta el return, aqui se pasan tanto los datos como el template para que se ejecute el URL
+```python
+return HttpResponse(template.render(context, request))
+```
+
+##### URLs:
+
 
 ```python
 print("Hello, World!")
