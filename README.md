@@ -6,8 +6,8 @@ Dataset: Obtained from Kaggle, social media use
 1. [Introduccion](#introduccion)
 2. [Informacion general](#Informacion-general)
 3. [¿Como ejecutar el proyecto?](#¿Como-ejecutar-el-proyecto?)   
-	a. [La primera vez ejecutando el proyecto:](#La_primera_vez_ejecutando_el_proyecto:)   
-	b. [Cada vez que se vaya a ejecutar el proyecto:](#Cada_vez_que_se_vaya_a_ejecutar_el_proyecto:)   
+	a. [La primera vez ejecutando el proyecto](#La_primera_vez_ejecutando_el_proyecto)   
+	b. [Cada vez que se vaya a ejecutar el proyecto](#Cada_vez_que_se_vaya_a_ejecutar_el_proyecto)   
 5. [Estructura del proyecto](#Estructura-del-proyecto)    
 	a. [Carpetas](#carpetas)   
 	b. [Views, URLs, Models](#Views,-URLs,-Models)   
@@ -27,7 +27,7 @@ El proyecto esta construido a partir del proyecto de generar un Dashboard conect
 ## ¿Como ejecutar el proyecto?
 Primero descarga el proyecto. Segundo entra a CMD o lineas de comandos, de ahi viaja por las carpetas hasta encontrarte en el directorio de la carpeta del proyecto, donde si ejecutas el comando dir(en Windows) o ls(en linux o Mac) debe aparecer el archivo manage.py junto con las carpetas: marketing_dashboard, productionfiles y sm_ads.
 Una vez en el directorio se debe ejectuar los siguientes comandos.  
-### La primera vez ejecutando el proyecto:  
+### La primera vez ejecutando el proyecto
 Para Windows:  
 ```CMD
 py -m venv dashboardenv
@@ -62,7 +62,7 @@ Para el siguiente comando te preguntará si quieres remplazar los documentos ant
 py manage.py collectstatic
 ```
 
-### Cada vez que se vaya a ejecutar el proyecto:  
+### Cada vez que se vaya a ejecutar el proyecto
 Como consideracion adicional hay que tener en cuenta que se debe tener corriendo el servido en MySQL con la base de datos con nombre socialmediause.  
 Además configurar en el documento settings.py en 'DATABASES', asegurarse que el 'NAME', 'USER', 'PASSWORD' concuerden con el nombre de la base de datos, el USER con el usuario de MySQL y la contraseña del usuario.
 ```CMD
