@@ -6,6 +6,7 @@ Dataset: Obtained from Kaggle, social media use
 1. [Introduccion](#introduccion)
 2. [Informacion general](#Informacion-general)
 3. [¿Como ejecutar el proyecto?](#¿Como-ejecutar-el-proyecto?)
+
 4. [Estructura del proyecto](#Estructura-del-proyecto)    
 	a. [Carpetas](#carpetas)   
 	b. [Views, URLs, Models](#Views,-URLs,-Models)   
@@ -48,6 +49,25 @@ Una vez estando de vuelta en el dirctorio se debe ejecutar el siguiente comando:
 ```CMD
 pip install -r requirements.txt
 ```
+ejecutar la siguiente linea de codigo:
+```CMD
+py manage.py makemigrations sm_ads
+```
+```CMD
+py manage.py migrate
+```
+Para el siguiente comando te preguntará si quieres remplazar los documentos anteriores a lo que se contesta con 'Y' y continua el proceso para poder ejecutar el servido.
+```CMD
+py manage.py collectstatic
+```
+
+### Cada vez que se vaya a ejecutar el proyecto:  
+Como consideracion adicional hay que tener en cuenta que se debe tener corriendo el servido en MySQL con la base de datos con nombre socialmediause.  
+Además configurar en el documento settings.py en 'DATABASES', asegurarse que el 'NAME', 'USER', 'PASSWORD' concuerden con el nombre de la base de datos, el USER con el usuario de MySQL y la contraseña del usuario.
+```CMD
+py manage.py runserver
+```
+
 ## Estructura del proyecto
 #### carpetas
 El proyecto esta estructurado en 3 carpetas principales:
