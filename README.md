@@ -5,9 +5,9 @@ Dataset: Obtained from Kaggle, social media use
 ## Tabla de contenido
 1. [Introduccion](#introduccion)
 2. [Informacion general](#Informacion-general)
-3. [¿Como ejecutar el proyecto?](#¿Como-ejecutar-el-proyecto?)
-	a. [La primera vez ejecutando el proyecto:](#La_primera_vez_ejecutando_el_proyecto:)
-	b. [Cada vez que se vaya a ejecutar el proyecto:](#Cada_vez_que_se_vaya_a_ejecutar_el_proyecto:)
+3. [¿Como ejecutar el proyecto?](#¿Como-ejecutar-el-proyecto?)   
+	a. [La primera vez ejecutando el proyecto:](#La_primera_vez_ejecutando_el_proyecto:)   
+	b. [Cada vez que se vaya a ejecutar el proyecto:](#Cada_vez_que_se_vaya_a_ejecutar_el_proyecto:)   
 5. [Estructura del proyecto](#Estructura-del-proyecto)    
 	a. [Carpetas](#carpetas)   
 	b. [Views, URLs, Models](#Views,-URLs,-Models)   
