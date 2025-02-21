@@ -112,11 +112,21 @@ return HttpResponse(template.render(context, request))
 ```
 
 ##### URLs:
-
+En URLs basicamente decides que urls tendra tu pagina web, por lo que si implementas hipervinculos de una pagina a otra es necesario agregar los links que se generan en URLs pues de ser contrario, generara un error, puede ser que no abra nada o en caso de tener documento 404.html, se ejecutara ese error anunciando que no se ha encontrado el recurso al que se dirigio.  
+En el documento se tiene la siguiente estructura :  
 
 ```python
-print("Hello, World!")
+urlpatterns = [
+    path('', views.main, name='main'),
+    path('index.html', views.main, name='main'),
+    path('general.html', views.general, name='general'),
+    path('get_chart1/', views.get_chart1, name='get_chart1'),
+    ...
+]
 ```
+El primer parametro hace a la referencia del link al que uno se dirige y que aparece a lado del dominio como parte de la ruta. El segundo parametro se nombra que funcion del documento view se usara para esa ruta, por ultimo el nombre es un nombre de referencia, por lo que se podria omitir.  
+Es importante resaltar que en este caso no se utiliza, sin embargo, hay una funcion con la que se pueden pasar valores por la direccion lo que permite hacer paginas personalizadas para cada usuario segun su ID.   
+Para mas informacion sobre la estructura y creacion de recursos en django [da clic aqui](https://docs.djangoproject.com/en/5.1/)  
 #### Estructura de la BD
 
 
