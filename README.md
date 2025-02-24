@@ -128,27 +128,12 @@ El primer parametro hace a la referencia del link al que uno se dirige y que apa
 Es importante resaltar que en este caso no se utiliza, sin embargo, hay una funcion con la que se pueden pasar valores por la direccion lo que permite hacer paginas personalizadas para cada usuario segun su ID.   
 Para mas informacion sobre la estructura y creacion de recursos en django [da clic aqui](https://docs.djangoproject.com/en/5.1/)      
 #### Estructura de la BD
-TABLE: countries  
--country_id  
--country_name  
-TABLE: devices  
--device_id  
--device_name  
-TABLE: entretaiment    
--entertainment_id  
--entertainment_name  
-TABLE: gender  
--gender_id  
--gender    
-TABLE: media_goal  
--goal_id  
--goal_name  
-TABLE: occupations  
--occupation_id  
--occupation_name  
-TABLE: social_media  
--socialm_id  
--socialm_name  
+  
+| TABLE: countries | TABLE: devices | TABLE: entretaiment | TABLE: gender | TABLE: media_goal | TABLE: occupations | TABLE: social_media | 
+|------------------|----------------|---------------------|---------------|-------------------|--------------------|---------------------|
+|-country_id       | -device_id     | -entertainment_id   | -gender_id    | -goal_id          | -occupation_id     | -socialm_id         |
+|-country_name     | -device_name   | -entertainment_name | -gender       | -goal_name        | -occupation_name   | -socialm_name       |
+
 TABLE: users
 -user_id  
 -age  
