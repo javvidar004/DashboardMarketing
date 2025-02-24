@@ -126,10 +126,63 @@ urlpatterns = [
 ```
 El primer parametro hace a la referencia del link al que uno se dirige y que aparece a lado del dominio como parte de la ruta. El segundo parametro se nombra que funcion del documento view se usara para esa ruta, por ultimo el nombre es un nombre de referencia, por lo que se podria omitir.  
 Es importante resaltar que en este caso no se utiliza, sin embargo, hay una funcion con la que se pueden pasar valores por la direccion lo que permite hacer paginas personalizadas para cada usuario segun su ID.   
-Para mas informacion sobre la estructura y creacion de recursos en django [da clic aqui](https://docs.djangoproject.com/en/5.1/)  
+Para mas informacion sobre la estructura y creacion de recursos en django [da clic aqui](https://docs.djangoproject.com/en/5.1/)      
 #### Estructura de la BD
-
-
+TABLE: countries  
+-country_id  
+-country_name  
+TABLE: devices  
+-device_id  
+-device_name  
+TABLE: entretaiment    
+-entertainment_id  
+-entertainment_name  
+TABLE: gender  
+-gender_id  
+-gender    
+TABLE: media_goal  
+-goal_id  
+-goal_name  
+TABLE: occupations  
+-occupation_id  
+-occupation_name  
+TABLE: social_media  
+-socialm_id  
+-socialm_name  
+TABLE: users
+-user_id  
+-age  
+-gender_id (foreign index from gender table)   
+-country_id (foreign index from gender table)  
+-d_sm_time (daily social media time)  
+-d_entertain_time (daily entertainment time)  
+-sm_plat_used (number of social media platforms used)  
+-primary_plat_id (foreign index from social_media table)  
+-d_message_time (daily messaging time)  
+-d_vid_cont_time (daily video content time)  
+-d_gaming_time (daily gaming time)  
+-occupation_id (foreign index from occupations table)  
+-monthly_income  
+-device_sm_id (foreign index from devices table)  
+-subscription_plats (number of susbscription in platforms)  
+-avg_sleep_time  
+-physical_activity_time  
+-reading_time  
+-work_study_time  
+-screen_time  
+-d_num_notifications (notifications recibed daily)  
+-d_music_time (daily music time)  
+-preferred_content_id (foreign index from entretaiment table)  
+-primary_sm_goal_id (foreign index from media_goal table)  
+-preferred_enter_plat_id (foreign index from social_media table)  
+-online_comm_time (Time spent in online communities)  
+-news_time (news consumption time)  
+-ad_interaction_count  
+-education_plat_time (education platform time)  
+-tech_savviness_level  
+-devide_for_entertainment_id (foreign index from devices table)   
+-sleep_quality  
+-monthly_spent_entertain  
 #### Conexion de BD a DJango
 
 
