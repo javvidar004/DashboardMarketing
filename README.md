@@ -70,6 +70,55 @@ Además configurar en el documento settings.py en 'DATABASES', asegurarse que el
 py manage.py runserver
 ```
 
+Para Linux:  
+En caso de no tener instalado python se deben instalar los siguientes paquetes:
+```CMD
+sudo apt install python3
+sudo apt install python3-pip
+sudo apt install python3.12-venv
+```
+Crear el ambiente virtual con los mudlos necesarios para ejecutar el proyecto  
+```CMD
+python3 -m venv dashboardenv
+```
+Se debe entrar a la carpeta 
+```CMD
+cd dashboardenv/bin
+source ./activate
+```
+
+Después se debe regresar al directorio del inicio, se puede regresar al directorio con el siguiente comando ejecutado dos veces:
+```CMD
+cd..
+```
+Una vez estando de vuelta en el dirctorio se debe ejecutar el siguiente comando:
+```CMD
+pip install -r requirements.txt
+```
+En caso de no poder intalar mysqlclient, ejecutar el siguiente comando y volver a intentar:  
+```CMD
+sudo apt-get update && sudo apt-get install python3-dev default-libmysqlclient-dev
+```
+
+ejecutar la siguiente linea de codigo:
+Para poder ejecutar el siguiente comando ya es necesario tener activo el servidor con la base de datos, ya que se haran ciertas modificaciones a la base de datos.
+
+```CMD
+python3 manage.py migrate
+```
+Para el siguiente comando te preguntará si quieres remplazar los documentos anteriores a lo que se contesta con 'Y' y continua el proceso para poder ejecutar el servido.
+```CMD
+python3 manage.py collectstatic
+```
+
+### Cada vez que se vaya a ejecutar el proyecto
+Como consideracion adicional hay que tener en cuenta que se debe tener corriendo el servido en MySQL con la base de datos con nombre socialmediause.  
+Además configurar en el documento settings.py en 'DATABASES', asegurarse que el 'NAME', 'USER', 'PASSWORD' concuerden con el nombre de la base de datos, el USER con el usuario de MySQL y la contraseña del usuario.
+```CMD
+py manage.py runserver
+```
+
+
 ## Estructura del proyecto
 #### carpetas
 El proyecto esta estructurado en 3 carpetas principales:
