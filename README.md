@@ -42,6 +42,21 @@ cd Scripts
 ```CMD
 activate.bat
 ```
+Para Mac:  
+```CMD
+py -m venv dashboardenv
+```
+Se debe entrar a la carpeta 
+```CMD
+cd dashboardenv
+```
+```CMD
+cd bin
+```
+```CMD
+source activate
+```
+
 Después se debe regresar al directorio del inicio, se puede regresar al directorio con el siguiente comando ejecutado dos veces:
 ```CMD
 cd..
