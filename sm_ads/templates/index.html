@@ -64,19 +64,19 @@
                   <li class="mt">
                       <a class="active" href="index.html">
                           <i class="fa fa-dashboard"></i>
-                          <span>Dashboard</span>
+                          <span>Main Dashboard</span>
                       </a>
                   </li>
 
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-desktop"></i>
-                          <span>UI Elements</span>
+                          <span>Social Media Platforms</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="general.html">General</a></li>
-                          <li><a  href="buttons.html">Buttons</a></li>
-                          <li><a  href="panels.html">Panels</a></li>
+                        {% for x in redesSociales %}
+                          <li><a href="smp/{{ x.socialm_id }}">{{ x.socialm_name }}</a></li>
+                        {% endfor %}
                       </ul>
                   </li>
 
