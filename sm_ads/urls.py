@@ -9,8 +9,6 @@ urlpatterns = [
     path('cntr/<int:id>', views.countriesDetail, name='detailContry'),
     path('gnr/<int:id>', views.genderDetail, name='detailGender'),
     path('entr/<int:id>', views.entertainmentDetail, name='detailEntertainment'),
-    
-    path('general.html', views.general, name='general'),
 
 
 
