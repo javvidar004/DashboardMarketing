@@ -349,7 +349,7 @@
 
 
               <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-2">
                     <table>
                         <th>ID</th>
                         <th>NAME</th>
@@ -357,41 +357,72 @@
                         {% for x in prefEntre %}
                           <tr>
                             <td>{{ x.entertainment_id }}</td>
-                            <td> {{ x.name }}</td>
+                            <td> {{ x.entertainment_name }}</td>
                             <td>{{ x.people }}</td>
                           </tr>
                         {% endfor %}
                     </table>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-2">
                     <table>
                         <th>ID</th>
                         <th>NAME</th>
-                        <th>PEOPLE</th>
-                        {% for x in usoRedes %}
+                        <th>SPENT</th>
+                        {% for x in spentEntre %}
                           <tr>
-                            <td>{{ x.entertainment_id }}</td>
-                            <td> {{ x.name }}</td>
-                            <td>{{ x.people }}</td>
+                            <td>{{ x.country_id }}</td>
+                            <td> {{ x.country_name }}</td>
+                            <td>{{ x.total_spent }}</td>
                           </tr>
                         {% endfor %}
                     </table>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-2">
                     <table>
                         <th>ID</th>
                         <th>NAME</th>
-                        <th>PEOPLE</th>
-                        {% for x in usoRedes %}
+                        <th>AVG</th>
+                        {% for x in gainsPais %}
                           <tr>
-                            <td>{{ x.entertainment_id }}</td>
-                            <td> {{ x.name }}</td>
-                            <td>{{ x.people }}</td>
+                            <td>{{ x.country_id }}</td>
+                            <td> {{ x.country_name }}</td>
+                            <td>{{ x.avg_income }}</td>
                           </tr>
                         {% endfor %}
                     </table>
                 </div>
-
+                <div class="col-lg-2">
+                    <table>
+                        <th>ID</th>
+                        <th>NAME</th>
+                        <th>PLATFORM</th>
+                        <th>AGE GROUP</th>
+                        <th>TOTAL USERS</th>
+                        {% for x in edadRsPais %}
+                          <tr>
+                            <td>{{ x.country_id }}</td>
+                            <td> {{ x.country_name }}</td>
+                            <td>{{ x.Platform }}</td>
+                            <td>{{ x.age_group }}</td>
+                            <td>{{ x.total_users }}</td>
+                          </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                <div class="col-lg-2">
+                    <table>
+                        <th>ID</th>
+                        <th>NAME</th>
+                        <th>TOTAL</th>
+                        {% for x in gastoOcupacion %}
+                          <tr>
+                            <td>{{ x.occupation_id }}</td>
+                            <td> {{ x.occupation_name }}</td>
+                            <td>{{ x.total_spent }}</td>
+                          </tr>
+                        {% endfor %}
+                    </table>
+                </div>
               </div>
 
 
