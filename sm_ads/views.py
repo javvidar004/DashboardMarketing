@@ -17,7 +17,42 @@ def auxMenu():
 
 
 def main(request):
-  prefEntre = Entretaiment.objects.raw('SELECT entretaiment.entertainment_id AS entertainment_id, entretaiment.entertainment_name AS name, COUNT(preferred_content_id) AS people FROM entretaiment, users WHERE preferred_content_id = entretaiment.entertainment_id GROUP BY entretaiment.entertainment_id;')
+  #consumo por tipo de entretenimiento
+  prefEntre = Entretaiment.objects.raw(f'''SELECT entretaiment.entertainment_id AS entertainment_id, entretaiment.entertainment_name AS name, COUNT(preferred_content_id) AS people 
+                                       FROM entretaiment, users 
+                                       WHERE preferred_content_id = entretaiment.entertainment_id 
+                                       GROUP BY entretaiment.entertainment_id;''')
+  #orden por pais que mas gasta en entretenimiento
+  spentEntre = Countries.objects.raw(f'''SELECT countries.country_id, countries.country_name, ROUND(SUM(users.monthly_spent_entertain),2) AS total_spent
+                                        FROM users
+                                        JOIN countries ON users.country_id = countries.country_id
+                                        GROUP BY countries.country_id, countries.country_name
+                                        ORDER BY total_spent DESC;''')
+    #orden por pais con mayor promedio
+  gainsPais = Countries.objects.raw(f'''SELECT countries.country_id, countries.country_name, ROUND(AVG(users.monthly_income),2) AS avg_income
+                                        FROM users
+                                        JOIN countries ON users.country_id = countries.country_id
+                                        GROUP BY countries.country_id, countries.country_name
+                                        ORDER BY avg_income DESC;''')
+  edadRsPais = Countries.objects.raw(f'''SELECT countries.country_id, countries.country_name, social_media.socialm_name AS Platform,
+                                        CASE 
+                                        WHEN users.age BETWEEN 0 AND 17 THEN '0-17'
+                                        WHEN users.age BETWEEN 18 AND 25 THEN '18-25'
+                                        WHEN users.age BETWEEN 26 AND 35 THEN '26-35'
+                                        WHEN users.age BETWEEN 36 AND 50 THEN '36-50'
+                                        ELSE '51+' 
+                                        END AS age_group,
+                                        COUNT(*) AS total_users
+                                        FROM users
+                                        JOIN countries ON users.country_id = countries.country_id
+                                        JOIN social_media ON users.primary_plat_id = social_media.socialm_id
+                                        GROUP BY countries.country_name, social_media.socialm_name, age_group, countries.country_id
+                                        ORDER BY countries.country_name, social_media.socialm_name, total_users DESC;''')
+  gastoOcupacion = Occupations.objects.raw('''SELECT occupations.occupation_id, occupations.occupation_name, ROUND(SUM(users.monthly_spent_entertain),2) AS total_spent
+                                        FROM users
+                                        JOIN occupations ON users.occupation_id = occupations.occupation_id
+                                        GROUP BY occupations.occupation_name, occupations.occupation_id
+                                        ORDER BY total_spent DESC;''')
   redesSociales, paises, generos, tipoEntretenimiento = auxMenu()
   template = loader.get_template('index.html') 
   context = {
@@ -26,6 +61,10 @@ def main(request):
      'paises': paises,
      'generos': generos,
      'tipoEntretenimiento': tipoEntretenimiento,
+     'spentEntre': spentEntre,
+     'gainsPais': gainsPais,
+     'edadRsPais':edadRsPais,
+     'gastoOcupacion':gastoOcupacion, 
   }
   return HttpResponse(template.render(context, request))
 
