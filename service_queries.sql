@@ -146,6 +146,46 @@ GROUP BY devices.device_name
 ORDER BY total_users DESC;
 
 
+// Relación que existe entre los ingresos y los gastos en cosas de entretenimiento 
 
+SELECT country_name, AVG(users.monthly_income) AS prom_ingresos, AVG(users.monthly_spent_entertain) AS prom_gastos
+FROM users
+JOIN countries ON users.country_id = countries.country_id
+GROUP BY country_name
+ORDER BY prom_gastos DESC;
 
+// Para saber en que países pasan más tiempo entre redes sociales o plataformas de entretenimiento:
 
+SELECT countries.country_name, AVG(users.d_sm_time) AS prom_redes_sociales, AVG(users.d_entertain_time) AS prom_plat_entret
+FROM users
+JOIN countries ON users.country_id = countries.country_id
+GROUP BY countries.country_name
+ORDER BY prom_redes_sociales DESC;
+
+// Redes sociales más usadas por las personas dependiendo de a que se dedican:
+
+SELECT occupations.occupation_name, social_media.socialm_name,
+COUNT(users.user_id) AS total_usuarios
+FROM users
+JOIN occupations ON users.occupation_id = occupations.occupation_id
+JOIN social_media ON users.primary_plat_id = social_media.socialm_id
+GROUP BY occupations.occupation_name, social_media.socialm_name
+ORDER BY total_usuarios DESC;
+
+// Tiempo frente a la pantalla relacionado con la calidad de sueño de las personas:
+
+SELECT 
+    CASE 
+        WHEN screen_time < 3 THEN 'Bajo'
+        WHEN screen_time BETWEEN 3 AND 6 THEN 'Moderado'
+        ELSE 'Alto'
+    END AS screen_usage,
+    CASE 
+        WHEN sleep_quality >= 7 THEN 'Buena'
+        WHEN sleep_quality BETWEEN 5 AND 6 THEN 'Regular'
+        ELSE 'Mala'
+    END AS sleep_category,
+    COUNT(*) AS users_count
+FROM users
+GROUP BY screen_usage, sleep_category
+ORDER BY users_count DESC;
