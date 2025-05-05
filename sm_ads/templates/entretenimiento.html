@@ -4,290 +4,291 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="Dashboard">
-    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-
-    <title>{{ entertainment_name }} - Análisis Detallado</title>
-
+    <title>{{ entertainment_name }} - Marketing Insights</title>
     <link href="{% static 'assets/css/bootstrap.css' %}" rel="stylesheet">
     <link href="{% static 'assets/font-awesome/css/font-awesome.css' %}" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/zabuto_calendar.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/js/gritter/css/jquery.gritter.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/lineicons/style.css' %}">
-
     <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
     <link href="{% static 'assets/css/style-responsive.css' %}" rel="stylesheet">
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    </head>
-
+     <style>
+        /* Estilos .chart-panel, .metric-panel, .insight-text, h4.chart-title, h5.sub-chart-title */
+        .chart-panel { background-color: #ffffff; border-radius: 4px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding-bottom: 15px; }
+        .chart-panel .panel-heading { background-color: #f5f5f5; border-bottom: 1px solid #ddd; padding: 10px 15px; font-weight: 600; border-top-left-radius: 4px; border-top-right-radius: 4px; }
+        .chart-panel .panel-body { height: 280px; /* Un poco menos altura */ padding: 15px; }
+        .chart-panel .panel-body-taller { height: 320px; padding: 15px; } /* Para gráficos más altos */
+        .metric-panel { background-color: #ffffff; border-radius: 4px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; height: 120px; display: flex; flex-direction: column; justify-content: center; }
+        .metric-panel i { font-size: 1.8em; margin-bottom: 8px; color: #4ECDC4; }
+        .metric-panel h4 { margin: 0; font-size: 1.4em; font-weight: 600; color: #333; }
+        .metric-panel p { margin: 3px 0 0 0; color: #797979; font-size: 0.85em; }
+        .insight-text { padding: 0 15px 10px 15px; font-style: italic; color: #666; font-size: 0.9em; }
+        h4.chart-title { padding-left: 15px; margin-top: 25px; margin-bottom: 10px; color:#333;}
+        h5.sub-chart-title { text-align:center; margin-bottom:5px; color:#555; font-weight:600; font-size:0.95em;}
+     </style>
+  </head>
   <body>
-
   <section id="container" >
-      <header class="header black-bg">
-                <div class="sidebar-toggle-box">
-                    <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
-                </div>
-              <a href="{% url 'main' %}" class="logo"><b>ANÁLISIS DE {{ titulo }}</b></a>
-              <div class="top-menu">
-              </div>
-          </header>
-        <aside>
-            <div id="sidebar"  class="nav-collapse ">
-                <ul class="sidebar-menu" id="nav-accordion">
-                    <li class="mt">
-                        <a href="{% url 'main' %}">
-                            <i class="fa fa-dashboard"></i>
-                            <span>Main Dashboard</span>
-                        </a>
-                    </li>
+      <header class="header black-bg">...</header>
+       <aside>
+           <div id="sidebar" class="nav-collapse ">
+               <ul class="sidebar-menu" id="nav-accordion">
+                  <li class="mt"><a href="{% url 'main' %}"><i class="fa fa-dashboard"></i><span>Main Dashboard</span></a></li>
+                   <li class="sub-menu">
+                       <a href="javascript:;"><i class="fa fa-desktop"></i><span>Social Media Platforms</span></a>
+                       <ul class="sub">{% for x in redesSociales %}<li><a href="{% url 'detailPlatform' x.socialm_id %}">{{ x.socialm_name }}</a></li>{% endfor %}</ul>
+                   </li>
+                   <li class="sub-menu">
+                       <a href="javascript:;"><i class="fa fa-cloud"></i><span>Countries</span></a>
+                       <ul class="sub">{% for x in paises %}<li><a href="{% url 'detailContry' x.country_id %}">{{ x.country_name }}</a></li>{% endfor %}</ul>
+                   </li>
+                    <li class="sub-menu">
+                       <a href="javascript:;"><i class="fa fa-book"></i><span>Genders</span></a>
+                       <ul class="sub">{% for x in generos %}<li><a href="{% url 'detailGender' x.gender_id %}">{{ x.gender }}</a></li>{% endfor %}</ul>
+                   </li>
+                   <li class="sub-menu">
+                       <a href="javascript:;" {% if request.resolver_match.url_name == 'detailEntertainment' %}class="active"{% endif %}>
+                           <i class="fa fa-tasks"></i><span>Entertainment</span>
+                       </a>
+                        <ul class="sub">
+                           {% for x in tipoEntretenimiento %}
+                               <li {% if x.entertainment_id == entertainment_id %}class="active"{% endif %}>
+                                   <a href="{% url 'detailEntertainment' x.entertainment_id %}">{{ x.entertainment_name }}</a>
+                               </li>
+                           {% endfor %}
+                       </ul>
+                   </li>
+              </ul>
+           </div>
+       </aside>
 
-                    <li class="sub-menu">
-                        <a href="javascript:;">
-                            <i class="fa fa-desktop"></i>
-                            <span>Social Media Platforms</span>
-                        </a>
-                        <ul class="sub">
-                          {% for x in redesSociales %}
-                              <li><a href="{% url 'detailPlatform' x.socialm_id %}">{{ x.socialm_name }}</a></li>
-                          {% endfor %}
-                        </ul>
-                    </li>
-
-                    <li class="sub-menu">
-                        <a href="javascript:;">
-                            <i class="fa fa-cloud"></i>
-                            <span>Countries</span>
-                        </a>
-                        <ul class="sub">
-                          {% for x in paises %}
-                              <li><a href="{% url 'detailContry' x.country_id %}">{{ x.country_name }}</a></li>
-                          {% endfor %}
-                        </ul>
-                    </li>
-                    <li class="sub-menu">
-                        <a href="javascript:;">
-                            <i class="fa fa-book"></i>
-                            <span>Genders</span>
-                        </a>
-                        <ul class="sub">
-                          {% for x in generos %}
-                            <li><a href="{% url 'detailGender' x.gender_id %}">{{ x.gender }}</a></li>
-                          {% endfor %}
-                        </ul>
-                    </li>
-                    <li class="sub-menu">
-                         <a href="javascript:;" {% if request.resolver_match.url_name == 'detailEntertainment' %}class="active"{% endif %}>
-                            <i class="fa fa-tasks"></i>
-                            <span>Entertainment</span>
-                        </a>
-                        <ul class="sub">
-                          {% for x in tipoEntretenimiento %} <li {% if x.entertainment_id == entertainment_id %}class="active"{% endif %}>
-                                <a href="{% url 'detailEntertainment' x.entertainment_id %}">{{ x.entertainment_name }}</a>
-                              </li>
-                          {% endfor %}
-                        </ul>
-                    </li>
-                </ul></div>
-        </aside><section id="main-content">
+      <section id="main-content">
           <section class="wrapper">
+               <h3 style="padding-left: 15px;"><i class="fa fa-angle-right"></i> Insights de Audiencia para: {{ entertainment_name }}</h3>
 
-              <div class="row">
-                  <div class="col-lg-12 main-chart">
-
-                      <div class="row mt">
-                        <div class="col-lg-12">
-                          <h3 style="padding-left: 15px;"><i class="fa fa-angle-right"></i> Análisis de Usuarios que Prefieren: {{ entertainment_name }}</h3>
-                        </div>
+               <h4 class="chart-title">Perfil de la Audiencia</h4>
+                <div class="row mt">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="chart-panel">
+                           <div class="panel-heading">Distribución por Edad</div>
+                           <div class="panel-body"><canvas id="entAgeDistChart"></canvas></div>
+                           <div class="insight-text"><i class="fa fa-lightbulb-o"></i> Grupo de edad predominante.</div>
+                       </div>
+                   </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="chart-panel">
+                           <div class="panel-heading">Distribución por Género</div>
+                           <div class="panel-body"><canvas id="entGenderDistChart"></canvas></div>
+                           <div class="insight-text"><i class="fa fa-lightbulb-o"></i> ¿Hay un sesgo de género claro?</div>
+                       </div>
+                   </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                       <div class="chart-panel">
+                           <div class="panel-heading">Top 5 Países</div>
+                           <div class="panel-body"><canvas id="entCountryChart"></canvas></div>
+                           <div class="insight-text"><i class="fa fa-lightbulb-o"></i> Foco geográfico principal.</div>
+                       </div>
+                   </div>
+               </div>
+               <div class="row mt">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                       <div class="chart-panel">
+                          <div class="panel-heading">Ocupaciones Comunes (Top 7)</div>
+                          <div class="panel-body"><canvas id="entOccupationChart"></canvas></div>
+                          <div class="insight-text"><i class="fa fa-lightbulb-o"></i> Sectores profesionales de la audiencia.</div>
                       </div>
+                   </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                       <div class="chart-panel">
+                           <div class="panel-heading">Distribución de Ingresos</div>
+                           <div class="panel-body"><canvas id="entIncomeDistChart"></canvas></div>
+                           <div class="insight-text"><i class="fa fa-lightbulb-o"></i> Nivel de poder adquisitivo.</div>
+                       </div>
+                   </div>
+               </div>
 
-                      <div class="row mt">
-                        <div class="col-md-6 col-sm-6 mb">
-                            <div class="white-panel pn" style="height: 350px;">
-                                <div class="white-header">
-                                    <h5>Distribución por Edad</h5>
-                                </div>
-                                <div style="height: 280px; padding: 10px;">
-                                    <canvas id="entAgeChart"></canvas>
-                                </div>
-                            </div>
-                        </div><div class="col-md-6 col-sm-6 mb">
-                            <div class="white-panel pn" style="height: 350px;">
-                                <div class="white-header">
-                                    <h5>Distribución por Género</h5>
-                                </div>
-                                <div style="height: 280px; padding: 10px;">
-                                     <canvas id="entGenderChart"></canvas>
-                                </div>
-                            </div>
-                        </div></div><div class="row mt">
-                        <div class="col-md-6 col-sm-6 mb">
-                            <div class="white-panel pn" style="height: 350px;">
-                                <div class="white-header">
-                                    <h5>Top 5 Países</h5>
-                                </div>
-                                <div style="height: 280px; padding: 10px;">
-                                    <canvas id="entCountryChart"></canvas>
-                                </div>
-                            </div>
-                        </div><div class="col-md-6 col-sm-6 mb">
-                            <div class="white-panel pn" style="height: 350px;">
-                                <div class="white-header">
-                                    <h5>Top 5 Ocupaciones</h5>
-                                </div>
-                                 <div style="height: 280px; padding: 10px;">
-                                    <canvas id="entOccupationChart"></canvas>
-                                 </div>
-                            </div>
-                        </div></div><div class="row mt">
-                        <div class="col-md-6 col-sm-6 mb">
-                            <div class="white-panel pn" style="height: 350px;">
-                                <div class="white-header">
-                                    <h5>Top 5 Redes Sociales Usadas</h5>
-                                </div>
-                                <div style="height: 280px; padding: 10px;">
-                                    <canvas id="entPlatformChart"></canvas>
-                                </div>
-                            </div>
-                        </div><div class="col-md-6 col-sm-6 mb">
-                            <div class="white-panel pn" style="height: 350px;">
-                                <div class="white-header">
-                                    <h5>Dispositivos Usados para Entretenimiento</h5>
-                                </div>
-                                 <div style="height: 280px; padding: 10px;">
-                                    <canvas id="entDeviceChart"></canvas>
-                                 </div>
-                            </div>
-                        </div></div></div></div></section>
+                <h4 class="chart-title">Dónde y Cómo Encontrarlos</h4>
+                 <div class="row mt">
+                     <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="chart-panel">
+                           <div class="panel-heading">Plataforma Social Principal</div>
+                           <div class="panel-body"><canvas id="entPrimarySmChart"></canvas></div>
+                            <div class="insight-text"><i class="fa fa-lightbulb-o"></i> Red social principal para impactarlos.</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="chart-panel">
+                           <div class="panel-heading">Plataforma Preferida para Ocio</div>
+                           <div class="panel-body"><canvas id="entPrefEntPlatChart"></canvas></div>
+                            <div class="insight-text"><i class="fa fa-lightbulb-o"></i> ¿Dónde consumen entretenimiento activamente?</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                         <div class="chart-panel">
+                           <div class="panel-heading">Dispositivo Preferido (Entretenimiento)</div>
+                           <div class="panel-body"><canvas id="entDeviceEntChart"></canvas></div>
+                            <div class="insight-text"><i class="fa fa-lightbulb-o"></i> Optimiza creatividades para este formato.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 class="chart-title">Comportamiento y Estilo de Vida</h4>
+                <div class="row mt">
+                     <div class="col-lg-4 col-md-6 col-sm-12">
+                       <div class="chart-panel">
+                           <div class="panel-heading">Tiempo Promedio (Ocio vs SM)</div>
+                           <div class="panel-body"><canvas id="entTimeCompareChart"></canvas></div>
+                           <div class="insight-text"><i class="fa fa-lightbulb-o"></i> Balance del consumo mediático.</div>
+                       </div>
+                   </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                       <div class="chart-panel">
+                          <div class="panel-heading">Objetivo Principal al Usar Redes</div>
+                          <div class="panel-body"><canvas id="entGoalChart"></canvas></div>
+                          <div class="insight-text"><i class="fa fa-lightbulb-o"></i> Motivación clave en redes sociales.</div>
+                      </div>
+                   </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                          <div class="panel-heading" style="background-color:#f5f5f5; border-radius: 4px 4px 0 0; padding:10px 15px; font-weight:600; margin-bottom:-1px;">Indicadores Clave (Promedio)</div>
+                          <div class="row" style="margin: 0 -5px; background:#fff; padding: 15px 5px 5px 5px; border-radius: 0 0 4px 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                              <div class="col-xs-3" style="padding: 0 5px;"><div class="metric-panel"><i class="fa fa-list-ol"></i><h4 id="metric_subs">--</h4><p>Suscrip.</p></div></div>
+                              <div class="col-xs-3" style="padding: 0 5px;"><div class="metric-panel"><i class="fa fa-bed"></i><h4 id="metric_sleep">--</h4><p>H. Sueño</p></div></div>
+                              <div class="col-xs-3" style="padding: 0 5px;"><div class="metric-panel"><i class="fa fa-heartbeat"></i><h4 id="metric_activity">--</h4><p>H. Actividad</p></div></div>
+                              <div class="col-xs-3" style="padding: 0 5px;"><div class="metric-panel"><i class="fa fa-cogs"></i><h4 id="metric_tech">--</h4><p>Tech Savvy</p></div></div>
+                               <div class="col-lg-12"><div class="insight-text" style="text-align: center;"><i class="fa fa-lightbulb-o"></i> Disposición a pagar y contexto de estilo de vida.</div></div>
+                          </div>
+                    </div>
+                </div>
+
+          </section>
       </section>
-      <footer class="site-footer">
-          <div class="text-center">
-               2014 - Alvarez.is <a href="#" class="go-top">
-                  <i class="fa fa-angle-up"></i>
-              </a>
-          </div>
-      </footer>
-      </section>
+      <footer class="site-footer">...</footer>
+  </section>
 
     <script src="{% static 'assets/js/jquery.js' %}"></script>
     <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
     <script class="include" type="text/javascript" src="{% static 'assets/js/jquery.dcjqaccordion.2.7.js' %}"></script>
     <script src="{% static 'assets/js/jquery.scrollTo.min.js' %}"></script>
     <script src="{% static 'assets/js/jquery.nicescroll.js' %}" type="text/javascript"></script>
-
     <script src="{% static 'assets/js/common-scripts.js' %}"></script>
 
     <script>
-        // Obtener el ID del tipo de entretenimiento desde el contexto de Django
         const entertainmentId = {{ entertainment_id }};
 
-        // URLs de las APIs
-        const entAgeApiUrl = `/api/entertainment/${entertainmentId}/age_distribution/`;
-        const entGenderApiUrl = `/api/entertainment/${entertainmentId}/gender_distribution/`;
-        const entCountryApiUrl = `/api/entertainment/${entertainmentId}/top_countries/`;
-        const entPlatformApiUrl = `/api/entertainment/${entertainmentId}/top_platforms/`;
-        const entOccupationApiUrl = `/api/entertainment/${entertainmentId}/top_occupations/`;
-        const entDeviceApiUrl = `/api/entertainment/${entertainmentId}/device_usage/`;
+        // URLs APIs
+        const demographicUrl = `/api/entertainment/${entertainmentId}/core_demographics/`;
+        const socioeconomicUrl = `/api/entertainment/${entertainmentId}/socioeconomic_profile/`;
+        const crossMediaUrl = `/api/entertainment/${entertainmentId}/platform_and_device/`;
+        const engagementUrl = `/api/entertainment/${entertainmentId}/engagement_profile/`;
 
-        // Colores (ajusta según tu tema)
-        const backgroundColors = [
-            'rgba(104, 223, 240, 0.7)', 'rgba(75, 192, 192, 0.7)', 'rgba(255, 159, 64, 0.7)',
-            'rgba(255, 99, 132, 0.7)',  'rgba(54, 162, 235, 0.7)', 'rgba(255, 206, 86, 0.7)',
-            'rgba(153, 102, 255, 0.7)', 'rgba(199, 199, 199, 0.7)'
-        ];
-        const borderColors = backgroundColors.map(color => color.replace('0.7', '1'));
+         // Colores
+        const colors = ['rgba(78, 205, 196, 0.7)', 'rgba(255, 107, 107, 0.7)', 'rgba(255, 217, 102, 0.7)', 'rgba(84, 160, 255, 0.7)', 'rgba(156, 136, 255, 0.7)', 'rgba(255, 159, 67, 0.7)'];
+        const borderColors = colors.map(c => c.replace('0.7', '1'));
+        const altColors = ['rgba(54, 162, 235, 0.7)', 'rgba(255, 99, 132, 0.7)', 'rgba(75, 192, 192, 0.7)', 'rgba(255, 206, 86, 0.7)', 'rgba(153, 102, 255, 0.7)'];
+        const altBorderColors = altColors.map(c => c.replace('0.7', '1'));
 
-        // Función genérica para crear gráficos (reutilizada)
-        function createEntertainmentChart(canvasId, apiUrl, chartType, label = '', defaultOptions = {}) {
-             const ctx = document.getElementById(canvasId);
-            if (!ctx) {
-                console.error(`Canvas element with ID ${canvasId} not found.`);
-                return;
-            }
+
+        // Función genérica para gráficos simples (bar, pie, doughnut)
+        function createSimpleChart(canvasId, chartData, chartType, defaultOptions = {}) {
+            const ctx = document.getElementById(canvasId);
+            if (!ctx) { console.error(`Canvas ${canvasId} not found.`); return; }
             const chartContext = ctx.getContext('2d');
 
-            fetch(apiUrl)
-                .then(response => {
-                    if (!response.ok) { throw new Error(`HTTP error! status: ${response.status}`); }
-                    return response.json();
-                 })
-                .then(data => {
-                    if (!data || !data.labels || !data.data) {
-                         console.error(`Data format error for ${canvasId}:`, data);
-                         chartContext.font = '14px Arial'; chartContext.fillStyle = '#808080'; chartContext.textAlign = 'center';
-                         chartContext.fillText('Error cargando datos', ctx.width / 2, ctx.height / 2);
-                         return;
-                    }
-                     if (data.data.length === 0 || data.data.every(val => val === 0)) {
-                         chartContext.font = '14px Arial'; chartContext.fillStyle = '#808080'; chartContext.textAlign = 'center';
-                         chartContext.fillText('No hay datos disponibles', ctx.width / 2, ctx.height / 2);
-                         return;
-                    }
+             if (!chartData || !chartData.labels || !chartData.data || chartData.data.length === 0) {
+                 console.warn(`No data for ${canvasId}`);
+                 chartContext.font = '14px Arial'; chartContext.fillStyle = '#808080'; chartContext.textAlign = 'center';
+                 chartContext.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+                 chartContext.fillText('No data available', ctx.canvas.width / 2, ctx.canvas.height / 2);
+                 return;
+             }
 
-                    let existingChart = Chart.getChart(ctx);
-                    if (existingChart) { existingChart.destroy(); }
+            let existingChart = Chart.getChart(ctx);
+            if (existingChart) { existingChart.destroy(); }
 
-                    const baseOptions = {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                         plugins: {
-                            legend: {
-                                display: (chartType === 'pie' || chartType === 'doughnut') && data.labels.length > 1,
-                                position: 'top',
-                                labels: { color: '#808080' }
-                            },
-                             tooltip: {
-                                bodyColor: '#eee', titleColor: '#eee', backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                            }
-                        }
-                    };
+            const dataConfig = {
+                labels: chartData.labels,
+                datasets: [{
+                    label: '# Usuarios', data: chartData.data,
+                    backgroundColor: chartType === 'bar' ? colors[0] : (chartType === 'doughnut' ? altColors.slice(0, chartData.labels.length) : colors.slice(0, chartData.labels.length) ) ,
+                    borderColor: chartType === 'bar' ? borderColors[0] : (chartType === 'doughnut' ? altBorderColors.slice(0, chartData.labels.length) : borderColors.slice(0, chartData.labels.length) ),
+                    borderWidth: 1
+                }]
+            };
+            const optionsConfig = { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: chartType !== 'bar', position:'top', labels:{color:'#808080'} } } };
+            if(chartType === 'bar') { optionsConfig.scales = { y: { beginAtZero: true } }; }
 
-                     if (chartType === 'bar' || chartType === 'line') {
-                        baseOptions.scales = {
-                            y: { beginAtZero: true, ticks: { color: '#808080' }, grid: { color: 'rgba(200, 200, 200, 0.2)' } },
-                            x: { ticks: { color: '#808080' }, grid: { color: 'rgba(200, 200, 200, 0.1)' } }
-                        };
-                         if (!baseOptions.plugins.legend.display) {
-                           baseOptions.plugins.legend.display = false;
-                        }
-                    }
-
-                    const finalOptions = { ...baseOptions, ...defaultOptions };
-
-                    new Chart(chartContext, {
-                        type: chartType,
-                        data: {
-                            labels: data.labels,
-                            datasets: [{
-                                label: label || `Usuarios`, // Label general
-                                data: data.data,
-                                backgroundColor: backgroundColors.slice(0, data.labels.length),
-                                borderColor: borderColors.slice(0, data.labels.length),
-                                borderWidth: 1
-                            }]
-                        },
-                        options: finalOptions
-                    });
-                })
-                .catch(error => {
-                    console.error(`Error fetching data for ${canvasId}:`, error);
-                     chartContext.font = '14px Arial'; chartContext.fillStyle = '#dc3545'; chartContext.textAlign = 'center';
-                     chartContext.fillText('Error al cargar gráfico', ctx.width / 2, ctx.height / 2);
-                });
+            new Chart(chartContext, { type: chartType, data: dataConfig, options: { ...optionsConfig, ...defaultOptions } });
         }
 
-        // Llamar a la función para cada gráfico
+        // Función para crear gráfico de barras agrupadas (Edad/Género)
+        function createGroupedBarChart(canvasId, chartData, defaultOptions = {}) {
+             const ctx = document.getElementById(canvasId);
+            if (!ctx) { console.error(`Canvas ${canvasId} not found.`); return; }
+             const chartContext = ctx.getContext('2d');
+
+             if (!chartData || !chartData.labels || !chartData.datasets || chartData.datasets.length === 0 || chartData.datasets.find(ds => ds.data.length === 0) ) {
+                 console.warn(`No data for grouped bar ${canvasId}`);
+                 chartContext.font = '14px Arial'; chartContext.fillStyle = '#808080'; chartContext.textAlign = 'center';
+                 chartContext.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+                 chartContext.fillText('No data available', ctx.canvas.width / 2, ctx.canvas.height / 2);
+                 return;
+             }
+
+             let existingChart = Chart.getChart(ctx);
+             if (existingChart) { existingChart.destroy(); }
+
+             const optionsConfig = { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: false }, y: { stacked: false, beginAtZero: true } }, plugins: { legend: { display: true, position: 'top', labels:{color:'#808080'} } } };
+             new Chart(chartContext, { type: 'bar', data: chartData, options: { ...optionsConfig, ...defaultOptions } });
+        }
+
+
+        // --- Carga de Datos y Renderizado ---
         document.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => {
-                createEntertainmentChart('entAgeChart', entAgeApiUrl, 'bar', 'Usuarios por Edad');
-                createEntertainmentChart('entGenderChart', entGenderApiUrl, 'doughnut', 'Usuarios por Género');
-                createEntertainmentChart('entCountryChart', entCountryApiUrl, 'bar', 'Usuarios por País');
-                createEntertainmentChart('entOccupationChart', entOccupationApiUrl, 'bar', 'Usuarios por Ocupación');
-                createEntertainmentChart('entPlatformChart', entPlatformApiUrl, 'pie', 'Usuarios por Plataforma Social');
-                createEntertainmentChart('entDeviceChart', entDeviceApiUrl, 'pie', 'Usuarios por Dispositivo');
-            }, 100);
+             setTimeout(() => {
+                // 1. Cargar Perfil Demográfico
+                fetch(demographicUrl)
+                    .then(res => res.ok ? res.json() : Promise.reject('Failed demographic fetch'))
+                    .then(data => {
+                        createSimpleChart('entAgeDistChart', data.age_distribution, 'bar');
+                        createSimpleChart('entGenderDistChart', data.gender_distribution, 'pie');
+                    }).catch(err => console.error("Error loading core demographics:", err));
+
+                // 2. Cargar Perfil Socio-Económico
+                 fetch(socioeconomicUrl)
+                    .then(res => res.ok ? res.json() : Promise.reject('Failed socioeconomic fetch'))
+                    .then(data => {
+                         createSimpleChart('entCountryChart', data.top_countries, 'bar'); // Movido aquí
+                         createSimpleChart('entOccupationChart', data.top_occupations, 'bar');
+                         createSimpleChart('entIncomeDistChart', data.income_distribution, 'bar');
+                    }).catch(err => console.error("Error loading socioeconomic profile:", err));
+
+                 // 3. Cargar Hábitos Cross-Media
+                 fetch(crossMediaUrl)
+                     .then(res => res.ok ? res.json() : Promise.reject('Failed cross-media fetch'))
+                     .then(data => {
+                         createSimpleChart('entPrimarySmChart', data.primary_sm_platform, 'doughnut');
+                         createSimpleChart('entPrefEntPlatChart', data.preferred_ent_platform, 'doughnut');
+                         createSimpleChart('entDeviceEntChart', data.device_entertainment, 'pie'); // Solo el de entretenimiento
+                     }).catch(err => console.error("Error loading cross-media habits:", err));
+
+                 // 4. Cargar Engagement y Estilo de Vida
+                 fetch(engagementUrl)
+                     .then(res => res.ok ? res.json() : Promise.reject('Failed engagement fetch'))
+                     .then(data => {
+                         createSimpleChart('entTimeCompareChart', data.time_comparison, 'bar');
+                         createSimpleChart('entGoalChart', data.sm_goal, 'doughnut');
+                         // Métricas
+                         const lifeData = data.lifestyle_and_subs || {};
+                         document.getElementById('metric_subs').textContent = lifeData.avg_subs !== 'N/A' ? lifeData.avg_subs : '--';
+                         document.getElementById('metric_sleep').textContent = lifeData.avg_sleep !== 'N/A' ? lifeData.avg_sleep : '--';
+                         document.getElementById('metric_activity').textContent = lifeData.avg_activity !== 'N/A' ? lifeData.avg_activity : '--';
+                         document.getElementById('metric_tech').textContent = lifeData.avg_tech !== 'N/A' ? lifeData.avg_tech : '--';
+                     }).catch(err => {
+                         console.error("Error loading engagement/lifestyle:", err);
+                         ['metric_subs', 'metric_sleep', 'metric_activity', 'metric_tech'].forEach(id => {
+                             const el = document.getElementById(id); if(el) el.textContent = '--';
+                         });
+                     });
+
+            }, 200); // Retraso
         });
     </script>
 
