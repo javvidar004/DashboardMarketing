@@ -13,7 +13,6 @@
     <link href="{% static 'assets/css/style-responsive.css' %}" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* Estilos (sin cambios respecto a la respuesta anterior) */
         .metric-card { background-color: #ffffff; border-radius: 4px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; height: 140px; display: flex; flex-direction: column; justify-content: center; border-left: 5px solid #4ECDC4; }
         .metric-card i { font-size: 2.2em; margin-bottom: 10px; color: #4ECDC4; }
         .metric-card h3 { margin: 0; font-size: 1.8em; font-weight: 700; color: #333; }
@@ -95,34 +94,35 @@
       </aside>
       <section id="main-content">
           <section class="wrapper site-min-height">
-               <h3 style="padding-left: 15px; margin-bottom: 20px;"><i class="fa fa-binoculars"></i> Contexto de la base</h3>
+               <h3 style="padding-left: 15px; margin-bottom: 20px;"><i class="fa fa-binoculars"></i> Contexto de la base
+              </h3>
 
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-12"><div class="metric-card"><i class="fa fa-users"></i><h3>{{ total_users_metric }}</h3><p>Usuarios Analizados</p></div></div>
                     <div class="col-lg-4 col-md-4 col-sm-12"><div class="metric-card"><i class="fa fa-birthday-cake"></i><h3>{{ avg_age_metric }}</h3><p>Edad Promedio</p></div></div>
-                    <div class="col-lg-4 col-md-4 col-sm-12"><div class="metric-card"><i class="fa fa-money"></i><h3>${{ avg_income_metric|floatformat:2 }}</h3><p>Ingreso Mensual Prom.</p></div></div>
+                    <div class="col-lg-4 col-md-4 col-sm-12"><div class="metric-card"><i class="fa fa-money"></i><h3>${{ avg_income_metric|floatformat:2 }}</h3><p>Ingreso Mensual Promedio</p></div></div>
                 </div> <h4 class="section-title">Plataformas y Contenido</h4>
                  <div class="row mt">
                      <div class="col-lg-4 col-md-6 col-sm-12">
                          <div class="chart-panel-small">
-                             <div class="panel-heading">Top Plataformas Sociales</div>
+                             <div class="panel-heading">Plataformas Sociales</div>
                              <div class="panel-body"><canvas id="mainTopPlatformsChart"></canvas></div>
                          </div>
                      </div>
                       <div class="col-lg-4 col-md-6 col-sm-12">
                          <div class="chart-panel-small">
-                             <div class="panel-heading">Top Tipos de Entretenimiento</div>
+                             <div class="panel-heading">Tipos de Entretenimiento</div>
                              <div class="panel-body"><canvas id="mainTopEntertainmentChart"></canvas></div>
                          </div>
                      </div>
                      <div class="col-lg-4 col-md-12 col-sm-12">
                          <div class="fact-card" id="fact_platform_income">
-                             <div class="fact-title">Plataforma con Mayor Ingreso Prom.</div>
+                             <div class="fact-title">Plataforma con Mayor Ingreso Promedio</div>
                              <div class="fact-value loading"><span class="fa fa-spinner fa-spin"></span></div>
                              <div class="fact-context">Usuarios con mayor poder adquisitivo.</div>
                          </div>
                           <div class="fact-card" id="fact_occupation_ent" style="margin-top:15px;">
-                             <div class="fact-title">Ocupación con Preferencia + Distintiva</div>
+                             <div class="fact-title">Ocupación con Preferencia Muy Distintiva</div>
                              <div class="fact-value loading"><span class="fa fa-spinner fa-spin"></span></div>
                              <div class="fact-context">Preferencia por contenido diferente al promedio.</div>
                          </div>
@@ -138,7 +138,6 @@
     <script src="{% static 'assets/js/common-scripts.js' %}"></script>
 
      <script>
-        // URLs APIs Dashboard (Asegúrate que los nombres coincidan con urls.py)
         const topPlatformsUrl = "{% url 'main_top_platforms' %}";
         const topEntertainmentUrl = "{% url 'main_top_entertainment' %}";
         const usersByCountryUrl = "{% url 'main_users_by_country' %}";
@@ -151,16 +150,14 @@
         const subsIncomeUrl = "{% url 'main_subs_per_income' %}";
         const countryScreenUrl = "{% url 'main_country_highest_screen' %}";
 
-        // Colores
         const colors = ['rgba(78, 205, 196, 0.7)', 'rgba(255, 107, 107, 0.7)', 'rgba(255, 217, 102, 0.7)', 'rgba(84, 160, 255, 0.7)', 'rgba(156, 136, 255, 0.7)'];
         const borderColors = colors.map(c => c.replace('0.7', '1'));
 
-        // Función genérica para gráficos simples (bar, pie, doughnut)
         function createSimpleChart(canvasId, apiUrl, chartType, options = {}) {
              const ctx = document.getElementById(canvasId)?.getContext('2d');
             if (!ctx) { console.error(`Canvas ${canvasId} not found.`); return; }
             let existingChart = Chart.getChart(ctx); if (existingChart) existingChart.destroy();
-            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // Limpiar antes de cargar
+            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); 
 
             fetch(apiUrl)
                 .then(res => res.ok ? res.json() : Promise.reject(new Error(`HTTP ${res.status} for ${apiUrl}`)))
@@ -174,17 +171,16 @@
                 .catch(error => { console.error(`Error for ${canvasId}:`, error); ctx.font = '12px Arial'; ctx.fillStyle = '#dc3545'; ctx.textAlign = 'center'; ctx.fillText(error.message, ctx.canvas.width / 2, ctx.canvas.height / 2); });
         }
 
-         // Función para poblar tarjetas de "datos curiosos"
          function populateFactCard(cardId, apiUrl, dataProcessor) {
             const card = document.getElementById(cardId);
             const valueEl = card?.querySelector('.fact-value');
             if (!card || !valueEl) { console.error(`Fact card ${cardId} or its value element not found.`); return; }
-            valueEl.innerHTML = '<span class="fa fa-spinner fa-spin"></span>'; // Show loading
+            valueEl.innerHTML = '<span class="fa fa-spinner fa-spin"></span>';
 
             fetch(apiUrl)
                 .then(res => res.ok ? res.json() : Promise.reject(new Error(`HTTP ${res.status} for ${apiUrl}`)))
                 .then(data => {
-                     valueEl.innerHTML = dataProcessor(data); // Usar innerHTML para iconos si es necesario
+                     valueEl.innerHTML = dataProcessor(data);
                      valueEl.classList.remove('loading');
                 })
                 .catch(error => {
@@ -194,16 +190,15 @@
                 });
         }
 
-        // --- Carga de Datos y Renderizado ---
         document.addEventListener('DOMContentLoaded', () => {
              setTimeout(() => {
-                 // Gráficos de Contexto
+
                  createSimpleChart('mainTopPlatformsChart', topPlatformsUrl, 'doughnut');
                  createSimpleChart('mainTopEntertainmentChart', topEntertainmentUrl, 'pie');
                  createSimpleChart('mainUsersCountryChart', usersByCountryUrl, 'bar');
                  createSimpleChart('mainSubsIncomeChart', subsIncomeUrl, 'bar', { scales: { y: { title: { display: true, text: 'Avg. Suscripciones' } } } });
 
-                 // Datos Curiosos (Tarjetas)
+
                  populateFactCard('fact_platform_income', platformIncomeUrl, data => data.socialm_name ? `${data.socialm_name} <span style="color:#666;font-size:0.9em;">($${(data.avg_income || 0).toFixed(0)})</span>` : 'N/A');
                  populateFactCard('fact_occupation_ent', occupationEntUrl, data => data.occupation_name ? `${data.occupation_name} <span style="color:#666;font-size:0.9em;">(${data.entertainment_name || 'N/A'})</span>` : 'N/A');
                  populateFactCard('fact_sleep_notifications', sleepNotifUrl, data => {
@@ -224,7 +219,7 @@
                  populateFactCard('fact_platform_savvy', platformSavvyUrl, data => data.socialm_name ? `${data.socialm_name} <span style="color:#666;font-size:0.9em;">(${(data.avg_tech || 0).toFixed(1)}/5)</span>` : 'N/A');
                  populateFactCard('fact_country_screen', countryScreenUrl, data => data.country_name ? `${data.country_name} <span style="color:#666;font-size:0.9em;">(${(data.avg_screen_time || 0).toFixed(1)}h)</span>` : 'N/A');
 
-            }, 250); // Retraso
+            }, 250); 
         });
     </script>
 

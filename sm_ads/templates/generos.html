@@ -4,18 +4,17 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ gender_name }} - Marketing Insights</title>
+    <title>{{ gender_name }} - Géneros y Redes</title>
     <link href="{% static 'assets/css/bootstrap.css' %}" rel="stylesheet">
     <link href="{% static 'assets/font-awesome/css/font-awesome.css' %}" rel="stylesheet" />
     <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
     <link href="{% static 'assets/css/style-responsive.css' %}" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
      <style>
-        /* Mismos estilos .chart-panel, .metric-panel, .insight-text, h4.chart-title */
         .chart-panel { background-color: #ffffff; border-radius: 4px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding-bottom: 15px; }
         .chart-panel .panel-heading { background-color: #f5f5f5; border-bottom: 1px solid #ddd; padding: 10px 15px; font-weight: 600; border-top-left-radius: 4px; border-top-right-radius: 4px; }
         .chart-panel .panel-body { height: 300px; padding: 15px; }
-        .metric-panel { background-color: #ffffff; border-radius: 4px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; height: 120px; /* Más bajo */ display: flex; flex-direction: column; justify-content: center; }
+        .metric-panel { background-color: #ffffff; border-radius: 4px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; height: 120px;  display: flex; flex-direction: column; justify-content: center; }
         .metric-panel i { font-size: 1.8em; margin-bottom: 8px; color: #4ECDC4; }
         .metric-panel h4 { margin: 0; font-size: 1.4em; font-weight: 600; color: #333; }
         .metric-panel p { margin: 3px 0 0 0; color: #797979; font-size: 0.85em; }
@@ -61,7 +60,7 @@
 
       <section id="main-content">
           <section class="wrapper">
-               <h3 style="padding-left: 15px;"><i class="fa fa-angle-right"></i> Marketing Insights para: {{ gender_name }}</h3>
+               <h3 style="padding-left: 15px;"><i class="fa fa-angle-right"></i> Información para: {{ gender_name }}</h3>
 
                <h4 class="chart-title">Perfil de Consumo de Medios</h4>
                 <div class="row mt">
@@ -75,23 +74,20 @@
                                <h5 class="sub-chart-title">Plataforma Preferida para Entretenimiento</h5>
                                <div style="height:140px;"><canvas id="genderPrefEntPlatChart"></canvas></div>
                            </div>
-                            <div class="insight-text"><i class="fa fa-lightbulb-o"></i> ¿Dónde pasa el tiempo este segmento y dónde busca entretenimiento?</div>
                         </div>
                     </div>
                      <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="chart-panel">
                            <div class="panel-heading">Tipos de Entretenimiento Preferidos</div>
                            <div class="panel-body"><canvas id="genderEntertainmentChart"></canvas></div>
-                            <div class="insight-text"><i class="fa fa-lightbulb-o"></i> Alinea el contenido de tus anuncios con sus gustos.</div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
+                    <!-- <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="chart-panel">
                            <div class="panel-heading">Tiempo Diario (SM vs Entretenimiento)</div>
                            <div class="panel-body"><canvas id="genderTimeCompareChart"></canvas></div>
-                           <div class="insight-text"><i class="fa fa-lightbulb-o"></i> ¿Balance entre conexión y consumo pasivo?</div>
                        </div>
-                   </div>
+                   </div> -->
                 </div>
 
 
@@ -101,14 +97,12 @@
                        <div class="chart-panel">
                            <div class="panel-heading">Gasto Promedio en Ocio por Nivel de Ingreso</div>
                            <div class="panel-body"><canvas id="genderIncomeSpendingChart"></canvas></div>
-                           <div class="insight-text"><i class="fa fa-lightbulb-o"></i> ¿Cómo se relaciona el ingreso con el gasto en entretenimiento para este género? Eje izquierdo=Gasto Promedio, Eje derecho(línea)=Nº Usuarios.</div>
                        </div>
                    </div>
                     <div class="col-lg-5 col-md-12 col-sm-12">
                        <div class="chart-panel">
-                           <div class="panel-heading">Ocupaciones Más Comunes (Top 10)</div>
+                           <div class="panel-heading">Se dedican a:</div>
                            <div class="panel-body"><canvas id="genderOccupationChart"></canvas></div>
-                           <div class="insight-text"><i class="fa fa-lightbulb-o"></i> Contextualiza tus campañas según los roles profesionales más frecuentes.</div>
                        </div>
                    </div>
                </div>
@@ -119,11 +113,10 @@
                        <div class="chart-panel">
                           <div class="panel-heading">Objetivo Principal al Usar Redes</div>
                           <div class="panel-body"><canvas id="genderGoalChart"></canvas></div>
-                          <div class="insight-text"><i class="fa fa-lightbulb-o"></i> Entiende la motivación principal para conectar mejor.</div>
                       </div>
                    </div>
                     <div class="col-lg-8 col-md-6 col-sm-12">
-                         <div class="panel-heading" style="background-color:#f5f5f5; border-radius: 4px 4px 0 0; padding:10px 15px; font-weight:600; margin-bottom:-1px;">Indicadores de Engagement (Promedio)</div>
+                         <!-- <div class="panel-heading" style="background-color:#f5f5f5; border-radius: 4px 4px 0 0; padding:10px 15px; font-weight:600; margin-bottom:-1px;">Indicadores de Engagement (Promedio)</div>
                          <div class="row" style="margin: 0 -5px; background:#fff; padding: 15px 5px 5px 5px; border-radius: 0 0 4px 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
                             <div class="col-lg-4 col-md-4 col-sm-4" style="padding: 0 5px;">
                                 <div class="metric-panel">
@@ -148,10 +141,9 @@
                             </div>
                             <div class="col-lg-12">
                                 <div class="insight-text" style="text-align: center;">
-                                    <i class="fa fa-lightbulb-o"></i> ¿Qué tan receptivos son a los anuncios? ¿Están saturados de notificaciones? ¿Nivel tecnológico?
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                    </div>
                </div>
 
@@ -170,7 +162,7 @@
     <script>
         const genderId = {{ gender_id }};
 
-        // URLs APIs
+
         const platformPrefUrl = `/api/gender/${genderId}/platform_preference/`;
         const topEntertainmentUrl = `/api/gender/${genderId}/top_entertainment/`;
         const timeCompareUrl = `/api/gender/${genderId}/sm_vs_ent_time/`;
@@ -178,16 +170,12 @@
         const topOccupationsUrl = `/api/gender/${genderId}/top_occupations/`;
         const goalDistUrl = `/api/gender/${genderId}/sm_goal_distribution/`;
         const engagementUrl = `/api/gender/${genderId}/engagement_indicators/`;
-        // const ageDistUrl = `/api/gender/${genderId}/age_distribution/`; // Si decides mantenerla
 
-        // Colores
         const colors = ['rgba(78, 205, 196, 0.7)', 'rgba(255, 107, 107, 0.7)', 'rgba(255, 217, 102, 0.7)', 'rgba(84, 160, 255, 0.7)', 'rgba(156, 136, 255, 0.7)', 'rgba(255, 159, 67, 0.7)'];
         const borderColors = colors.map(c => c.replace('0.7', '1'));
         const altColors = ['rgba(54, 162, 235, 0.7)', 'rgba(255, 99, 132, 0.7)', 'rgba(75, 192, 192, 0.7)', 'rgba(255, 206, 86, 0.7)', 'rgba(153, 102, 255, 0.7)'];
         const altBorderColors = altColors.map(c => c.replace('0.7', '1'));
 
-
-        // Función genérica para crear gráficos (adaptada)
         function createGenderChart(canvasId, apiUrl, chartType, defaultOptions = {}) {
              const ctx = document.getElementById(canvasId);
             if (!ctx) { console.error(`Canvas ${canvasId} not found.`); return; }
@@ -204,7 +192,7 @@
 
                     let chartData, chartOptions = {};
 
-                     if (chartType === 'bar' && data.datasets && data.datasets.length > 1 && data.datasets[0].yAxisID) { // Eje Mixto (Ingreso/Gasto)
+                     if (chartType === 'bar' && data.datasets && data.datasets.length > 1 && data.datasets[0].yAxisID) { 
                         chartData = data;
                          chartOptions = {
                             responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false },
@@ -215,7 +203,7 @@
                             },
                              plugins: { legend: { display: true, position: 'top', labels:{color:'#808080'} }, tooltip:{mode: 'index', intersect: false} }
                         };
-                    } else { // Barra simple, Pie, Doughnut
+                    } else { 
                         chartData = {
                             labels: data.labels,
                             datasets: [{
@@ -239,21 +227,19 @@
                 });
         }
 
-        // --- Función específica para Gráficos de Preferencia de Plataforma ---
         function createPlatformPrefCharts(apiUrl) {
              fetch(apiUrl)
                 .then(response => response.ok ? response.json() : Promise.reject(`HTTP error! status: ${response.status}`))
                 .then(data => {
                     if (!data || !data.primary_sm || !data.preferred_ent_platform) { throw new Error('Invalid platform pref data'); }
 
-                    // Gráfico SM Primaria
+
                     const ctxSm = document.getElementById('genderPrimarySmChart')?.getContext('2d');
                     if(ctxSm && data.primary_sm.labels && data.primary_sm.data.length > 0) {
                          let existingSm = Chart.getChart(ctxSm); if(existingSm) existingSm.destroy();
                          new Chart(ctxSm, { type: 'doughnut', data: { labels: data.primary_sm.labels, datasets: [{ data: data.primary_sm.data, backgroundColor: colors, borderColor: borderColors }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } } });
                     } else if(ctxSm) { ctxSm.fillText('Sin datos', ctxSm.canvas.width / 2, ctxSm.canvas.height / 2); }
 
-                     // Gráfico Plataforma Entretenimiento Preferida
                     const ctxEnt = document.getElementById('genderPrefEntPlatChart')?.getContext('2d');
                      if(ctxEnt && data.preferred_ent_platform.labels && data.preferred_ent_platform.data.length > 0) {
                          let existingEnt = Chart.getChart(ctxEnt); if(existingEnt) existingEnt.destroy();
@@ -261,14 +247,12 @@
                     } else if(ctxEnt) { ctxEnt.fillText('Sin datos', ctxEnt.canvas.width / 2, ctxEnt.canvas.height / 2); }
                 })
                 .catch(error => console.error('Error loading platform preference charts:', error));
-        }
-
-         // --- Función para cargar métricas de engagement ---
+            }
         function loadEngagementMetrics(apiUrl) {
             fetch(apiUrl)
                 .then(response => response.ok ? response.json() : Promise.reject(`HTTP error ${response.status}`))
                 .then(data => {
-                     console.log("Engagement API Data:", data); // Log para depurar
+                     console.log("Engagement API Data:", data); 
                      document.getElementById('metric_ad_interactions').textContent = data.avg_ad_interactions !== 'N/A' ? data.avg_ad_interactions : '--';
                      document.getElementById('metric_notifications').textContent = data.avg_notifications !== 'N/A' ? data.avg_notifications : '--';
                      document.getElementById('metric_tech').textContent = data.avg_tech_savviness !== 'N/A' ? data.avg_tech_savviness : '--';
@@ -282,24 +266,21 @@
                 });
         }
 
-
-        // --- Llamadas para Renderizar ---
         document.addEventListener('DOMContentLoaded', () => {
              setTimeout(() => {
-                 // Consumo Medios
-                 createPlatformPrefCharts(platformPrefUrl); // Carga los dos gráficos de plataformas
+
+                 createPlatformPrefCharts(platformPrefUrl); 
                  createGenderChart('genderEntertainmentChart', topEntertainmentUrl, 'pie');
                  createGenderChart('genderTimeCompareChart', timeCompareUrl, 'bar');
 
-                 // Económico y Profesional
-                 createGenderChart('genderIncomeSpendingChart', incomeSpendingUrl, 'bar'); // Eje mixto
+
+                 createGenderChart('genderIncomeSpendingChart', incomeSpendingUrl, 'bar'); 
                  createGenderChart('genderOccupationChart', topOccupationsUrl, 'bar');
 
-                 // Engagement y Comportamiento
-                 createGenderChart('genderGoalChart', goalDistUrl, 'doughnut');
-                 loadEngagementMetrics(engagementUrl); // Carga las 3 métricas
 
-                 // createGenderChart('genderAgeDistributionChart', ageDistUrl, 'bar'); // Si decides mantener edad
+                 createGenderChart('genderGoalChart', goalDistUrl, 'doughnut');
+                 loadEngagementMetrics(engagementUrl); 
+
 
             }, 200);
         });

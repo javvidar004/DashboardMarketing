@@ -4,18 +4,17 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ entertainment_name }} - Marketing Insights</title>
+    <title>{{ entertainment_name }} - Entreteneimiento </title>
     <link href="{% static 'assets/css/bootstrap.css' %}" rel="stylesheet">
     <link href="{% static 'assets/font-awesome/css/font-awesome.css' %}" rel="stylesheet" />
     <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
     <link href="{% static 'assets/css/style-responsive.css' %}" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
      <style>
-        /* Estilos .chart-panel, .metric-panel, .insight-text, h4.chart-title, h5.sub-chart-title */
         .chart-panel { background-color: #ffffff; border-radius: 4px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding-bottom: 15px; }
         .chart-panel .panel-heading { background-color: #f5f5f5; border-bottom: 1px solid #ddd; padding: 10px 15px; font-weight: 600; border-top-left-radius: 4px; border-top-right-radius: 4px; }
-        .chart-panel .panel-body { height: 280px; /* Un poco menos altura */ padding: 15px; }
-        .chart-panel .panel-body-taller { height: 320px; padding: 15px; } /* Para gráficos más altos */
+        .chart-panel .panel-body { height: 280px; padding: 15px; }
+        .chart-panel .panel-body-taller { height: 320px; padding: 15px; } 
         .metric-panel { background-color: #ffffff; border-radius: 4px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; height: 120px; display: flex; flex-direction: column; justify-content: center; }
         .metric-panel i { font-size: 1.8em; margin-bottom: 8px; color: #4ECDC4; }
         .metric-panel h4 { margin: 0; font-size: 1.4em; font-weight: 600; color: #333; }
@@ -70,37 +69,32 @@
                         <div class="chart-panel">
                            <div class="panel-heading">Distribución por Edad</div>
                            <div class="panel-body"><canvas id="entAgeDistChart"></canvas></div>
-                           <div class="insight-text"><i class="fa fa-lightbulb-o"></i> Grupo de edad predominante.</div>
                        </div>
                    </div>
                     <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="chart-panel">
                            <div class="panel-heading">Distribución por Género</div>
                            <div class="panel-body"><canvas id="entGenderDistChart"></canvas></div>
-                           <div class="insight-text"><i class="fa fa-lightbulb-o"></i> ¿Hay un sesgo de género claro?</div>
                        </div>
                    </div>
                     <div class="col-lg-4 col-md-12 col-sm-12">
                        <div class="chart-panel">
-                           <div class="panel-heading">Top 5 Países</div>
+                           <div class="panel-heading">Países: </div>
                            <div class="panel-body"><canvas id="entCountryChart"></canvas></div>
-                           <div class="insight-text"><i class="fa fa-lightbulb-o"></i> Foco geográfico principal.</div>
                        </div>
                    </div>
                </div>
                <div class="row mt">
                     <div class="col-lg-6 col-md-6 col-sm-12">
                        <div class="chart-panel">
-                          <div class="panel-heading">Ocupaciones Comunes (Top 7)</div>
+                          <div class="panel-heading">Ocupaciones analizadas: </div>
                           <div class="panel-body"><canvas id="entOccupationChart"></canvas></div>
-                          <div class="insight-text"><i class="fa fa-lightbulb-o"></i> Sectores profesionales de la audiencia.</div>
                       </div>
                    </div>
                     <div class="col-lg-6 col-md-6 col-sm-12">
                        <div class="chart-panel">
                            <div class="panel-heading">Distribución de Ingresos</div>
                            <div class="panel-body"><canvas id="entIncomeDistChart"></canvas></div>
-                           <div class="insight-text"><i class="fa fa-lightbulb-o"></i> Nivel de poder adquisitivo.</div>
                        </div>
                    </div>
                </div>
@@ -111,21 +105,18 @@
                         <div class="chart-panel">
                            <div class="panel-heading">Plataforma Social Principal</div>
                            <div class="panel-body"><canvas id="entPrimarySmChart"></canvas></div>
-                            <div class="insight-text"><i class="fa fa-lightbulb-o"></i> Red social principal para impactarlos.</div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="chart-panel">
                            <div class="panel-heading">Plataforma Preferida para Ocio</div>
                            <div class="panel-body"><canvas id="entPrefEntPlatChart"></canvas></div>
-                            <div class="insight-text"><i class="fa fa-lightbulb-o"></i> ¿Dónde consumen entretenimiento activamente?</div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-12 col-sm-12">
                          <div class="chart-panel">
                            <div class="panel-heading">Dispositivo Preferido (Entretenimiento)</div>
                            <div class="panel-body"><canvas id="entDeviceEntChart"></canvas></div>
-                            <div class="insight-text"><i class="fa fa-lightbulb-o"></i> Optimiza creatividades para este formato.</div>
                         </div>
                     </div>
                 </div>
@@ -133,20 +124,18 @@
                 <h4 class="chart-title">Comportamiento y Estilo de Vida</h4>
                 <div class="row mt">
                      <div class="col-lg-4 col-md-6 col-sm-12">
-                       <div class="chart-panel">
+                       <!-- <div class="chart-panel">
                            <div class="panel-heading">Tiempo Promedio (Ocio vs SM)</div>
                            <div class="panel-body"><canvas id="entTimeCompareChart"></canvas></div>
-                           <div class="insight-text"><i class="fa fa-lightbulb-o"></i> Balance del consumo mediático.</div>
-                       </div>
+                       </div> -->
                    </div>
                     <div class="col-lg-4 col-md-6 col-sm-12">
                        <div class="chart-panel">
                           <div class="panel-heading">Objetivo Principal al Usar Redes</div>
                           <div class="panel-body"><canvas id="entGoalChart"></canvas></div>
-                          <div class="insight-text"><i class="fa fa-lightbulb-o"></i> Motivación clave en redes sociales.</div>
-                      </div>
+                     </div>
                    </div>
-                    <div class="col-lg-4 col-md-12 col-sm-12">
+                    <!-- <div class="col-lg-4 col-md-12 col-sm-12">
                           <div class="panel-heading" style="background-color:#f5f5f5; border-radius: 4px 4px 0 0; padding:10px 15px; font-weight:600; margin-bottom:-1px;">Indicadores Clave (Promedio)</div>
                           <div class="row" style="margin: 0 -5px; background:#fff; padding: 15px 5px 5px 5px; border-radius: 0 0 4px 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
                               <div class="col-xs-3" style="padding: 0 5px;"><div class="metric-panel"><i class="fa fa-list-ol"></i><h4 id="metric_subs">--</h4><p>Suscrip.</p></div></div>
@@ -155,7 +144,7 @@
                               <div class="col-xs-3" style="padding: 0 5px;"><div class="metric-panel"><i class="fa fa-cogs"></i><h4 id="metric_tech">--</h4><p>Tech Savvy</p></div></div>
                                <div class="col-lg-12"><div class="insight-text" style="text-align: center;"><i class="fa fa-lightbulb-o"></i> Disposición a pagar y contexto de estilo de vida.</div></div>
                           </div>
-                    </div>
+                    </div> -->
                 </div>
 
           </section>
@@ -173,20 +162,20 @@
     <script>
         const entertainmentId = {{ entertainment_id }};
 
-        // URLs APIs
+
         const demographicUrl = `/api/entertainment/${entertainmentId}/core_demographics/`;
         const socioeconomicUrl = `/api/entertainment/${entertainmentId}/socioeconomic_profile/`;
         const crossMediaUrl = `/api/entertainment/${entertainmentId}/platform_and_device/`;
         const engagementUrl = `/api/entertainment/${entertainmentId}/engagement_profile/`;
 
-         // Colores
+
         const colors = ['rgba(78, 205, 196, 0.7)', 'rgba(255, 107, 107, 0.7)', 'rgba(255, 217, 102, 0.7)', 'rgba(84, 160, 255, 0.7)', 'rgba(156, 136, 255, 0.7)', 'rgba(255, 159, 67, 0.7)'];
         const borderColors = colors.map(c => c.replace('0.7', '1'));
         const altColors = ['rgba(54, 162, 235, 0.7)', 'rgba(255, 99, 132, 0.7)', 'rgba(75, 192, 192, 0.7)', 'rgba(255, 206, 86, 0.7)', 'rgba(153, 102, 255, 0.7)'];
         const altBorderColors = altColors.map(c => c.replace('0.7', '1'));
 
 
-        // Función genérica para gráficos simples (bar, pie, doughnut)
+
         function createSimpleChart(canvasId, chartData, chartType, defaultOptions = {}) {
             const ctx = document.getElementById(canvasId);
             if (!ctx) { console.error(`Canvas ${canvasId} not found.`); return; }
@@ -218,7 +207,6 @@
             new Chart(chartContext, { type: chartType, data: dataConfig, options: { ...optionsConfig, ...defaultOptions } });
         }
 
-        // Función para crear gráfico de barras agrupadas (Edad/Género)
         function createGroupedBarChart(canvasId, chartData, defaultOptions = {}) {
              const ctx = document.getElementById(canvasId);
             if (!ctx) { console.error(`Canvas ${canvasId} not found.`); return; }
@@ -240,10 +228,10 @@
         }
 
 
-        // --- Carga de Datos y Renderizado ---
+
         document.addEventListener('DOMContentLoaded', () => {
              setTimeout(() => {
-                // 1. Cargar Perfil Demográfico
+
                 fetch(demographicUrl)
                     .then(res => res.ok ? res.json() : Promise.reject('Failed demographic fetch'))
                     .then(data => {
@@ -251,31 +239,26 @@
                         createSimpleChart('entGenderDistChart', data.gender_distribution, 'pie');
                     }).catch(err => console.error("Error loading core demographics:", err));
 
-                // 2. Cargar Perfil Socio-Económico
+
                  fetch(socioeconomicUrl)
                     .then(res => res.ok ? res.json() : Promise.reject('Failed socioeconomic fetch'))
                     .then(data => {
-                         createSimpleChart('entCountryChart', data.top_countries, 'bar'); // Movido aquí
+                         createSimpleChart('entCountryChart', data.top_countries, 'bar'); 
                          createSimpleChart('entOccupationChart', data.top_occupations, 'bar');
                          createSimpleChart('entIncomeDistChart', data.income_distribution, 'bar');
                     }).catch(err => console.error("Error loading socioeconomic profile:", err));
-
-                 // 3. Cargar Hábitos Cross-Media
                  fetch(crossMediaUrl)
                      .then(res => res.ok ? res.json() : Promise.reject('Failed cross-media fetch'))
                      .then(data => {
                          createSimpleChart('entPrimarySmChart', data.primary_sm_platform, 'doughnut');
                          createSimpleChart('entPrefEntPlatChart', data.preferred_ent_platform, 'doughnut');
-                         createSimpleChart('entDeviceEntChart', data.device_entertainment, 'pie'); // Solo el de entretenimiento
+                         createSimpleChart('entDeviceEntChart', data.device_entertainment, 'pie'); 
                      }).catch(err => console.error("Error loading cross-media habits:", err));
-
-                 // 4. Cargar Engagement y Estilo de Vida
                  fetch(engagementUrl)
                      .then(res => res.ok ? res.json() : Promise.reject('Failed engagement fetch'))
                      .then(data => {
                          createSimpleChart('entTimeCompareChart', data.time_comparison, 'bar');
                          createSimpleChart('entGoalChart', data.sm_goal, 'doughnut');
-                         // Métricas
                          const lifeData = data.lifestyle_and_subs || {};
                          document.getElementById('metric_subs').textContent = lifeData.avg_subs !== 'N/A' ? lifeData.avg_subs : '--';
                          document.getElementById('metric_sleep').textContent = lifeData.avg_sleep !== 'N/A' ? lifeData.avg_sleep : '--';
@@ -288,7 +271,7 @@
                          });
                      });
 
-            }, 200); // Retraso
+            }, 200); 
         });
     </script>
 

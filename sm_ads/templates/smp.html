@@ -60,7 +60,7 @@
 
       <section id="main-content">
           <section class="wrapper">
-              <h3 style="padding-left: 15px;"><i class="fa fa-angle-right"></i> Marketing Insights para: {{ platform_name }}</h3>
+              <h3 style="padding-left: 15px;"><i class="fa fa-angle-right"></i> Información de: {{ platform_name }}</h3>
 
               <h4 class="chart-title">Perfil Principal de Audiencia</h4>
               <div class="row mt">
@@ -71,17 +71,15 @@
                               <canvas id="smpAgeGenderChart"></canvas>
                           </div>
                           <div class="insight-text">
-                              <i class="fa fa-lightbulb-o"></i> Identifica los segmentos demográficos clave (edad/género) con mayor concentración de usuarios en esta plataforma.
                           </div>
                       </div>
                   </div>
                   <div class="col-lg-4 col-md-12 col-sm-12">
                        <div class="chart-panel">
-                          <div class="panel-heading">Top Países</div>
+                          <div class="panel-heading">Países</div>
                           <div class="panel-body">
                               <canvas id="smpCountryChart"></canvas> </div>
                            <div class="insight-text">
-                              <i class="fa fa-lightbulb-o"></i> Concentra esfuerzos geográficos donde la plataforma tiene mayor penetración.
                           </div>
                       </div>
                   </div>
@@ -89,12 +87,11 @@
               <div class="row mt">
                    <div class="col-lg-12 col-md-12 col-sm-12">
                        <div class="chart-panel">
-                           <div class="panel-heading">Perfil Profesional y Poder Adquisitivo (Top 7 Ocupaciones)</div>
+                           <div class="panel-heading">Perfil y Poder Adquisitivo </div>
                            <div class="panel-body">
                                <canvas id="smpOccupationIncomeChart"></canvas>
                            </div>
                            <div class="insight-text">
-                              <i class="fa fa-lightbulb-o"></i> Entiende la profesión y el nivel de ingresos promedio de los usuarios más comunes para adaptar ofertas y precios. El eje izquierdo muestra usuarios, el derecho (línea) muestra ingreso promedio.
                           </div>
                        </div>
                    </div>
@@ -109,7 +106,6 @@
                               <canvas id="smpEntertainmentAffinityChart"></canvas>
                           </div>
                           <div class="insight-text">
-                              <i class="fa fa-lightbulb-o"></i> ¿Qué tipo de entretenimiento consumen los usuarios de esta plataforma? Usa esto para inspirar el contenido de tus anuncios.
                           </div>
                       </div>
                   </div>
@@ -120,7 +116,6 @@
                               <canvas id="smpUserIntentChart"></canvas>
                           </div>
                           <div class="insight-text">
-                              <i class="fa fa-lightbulb-o"></i> ¿Por qué usan las redes? Adapta tu mensaje: ¿buscan conectar, informarse, entretenerse o aprender?
                           </div>
                       </div>
                   </div>
@@ -140,7 +135,6 @@
                                 <div style="height:120px;"><canvas id="smpDeviceEntChart"></canvas></div>
                            </div>
                             <div class="insight-text">
-                              <i class="fa fa-lightbulb-o"></i> Optimiza tus anuncios y landing pages para los dispositivos más usados por esta audiencia, tanto para consumir la red social como para entretenimiento general.
                           </div>
                        </div>
                   </div>
@@ -161,20 +155,20 @@
     <script>
         const platformId = {{ platform_id }};
 
-        // URLs de las APIs nuevas y reutilizadas
+
         const ageGenderUrl = `/api/smp/${platformId}/age_gender_distribution/`;
         const occupationIncomeUrl = `/api/smp/${platformId}/occupation_income/`;
         const contentAffinityUrl = `/api/smp/${platformId}/content_affinity/`;
         const userIntentUrl = `/api/smp/${platformId}/user_intent/`;
         const engagementSpendingUrl = `/api/smp/${platformId}/engagement_spending/`;
         const deviceProfileUrl = `/api/smp/${platformId}/device_profile/`;
-        const topCountriesUrl = `/api/smp/${platformId}/top_countries/`; // Reutilizada
+        const topCountriesUrl = `/api/smp/${platformId}/top_countries/`;
 
-        // Colores (puedes definir más paletas)
+
         const colors = ['rgba(78, 205, 196, 0.7)', 'rgba(255, 107, 107, 0.7)', 'rgba(255, 217, 102, 0.7)', 'rgba(84, 160, 255, 0.7)', 'rgba(156, 136, 255, 0.7)', 'rgba(255, 159, 67, 0.7)'];
         const borderColors = colors.map(c => c.replace('0.7', '1'));
 
-        // Función genérica para crear gráficos (adaptada)
+
         function createMarketingChart(canvasId, apiUrl, chartType, defaultOptions = {}) {
             const ctx = document.getElementById(canvasId);
             if (!ctx) { console.error(`Canvas ${canvasId} not found.`); return; }
@@ -183,7 +177,7 @@
             fetch(apiUrl)
                 .then(response => response.ok ? response.json() : Promise.reject(`HTTP error! status: ${response.status}`))
                 .then(data => {
-                    // Validación básica de datos recibidos
+
                     if (!data || (chartType !== 'scatter' && chartType !== 'bubble' && !data.labels && !data.datasets) || ((chartType === 'scatter' || chartType === 'bubble') && !data.datasets) ) {
                          console.error(`Data format error for ${canvasId}:`, data); throw new Error('Invalid data format');
                     }
@@ -193,44 +187,43 @@
 
                     let chartData, chartOptions = {};
 
-                     // Configuración específica por tipo de gráfico
-                    if (chartType === 'bar' && data.datasets && data.datasets.length > 1 && data.datasets[0].yAxisID) { // Eje Mixto (Ocupación/Ingreso)
-                        chartData = data; // La API ya formatea los datasets
+                    if (chartType === 'bar' && data.datasets && data.datasets.length > 1 && data.datasets[0].yAxisID) { 
+                        chartData = data; 
                          chartOptions = {
                             responsive: true, maintainAspectRatio: false,
                             scales: {
                                 x: { ticks: { color: '#808080' }, grid: { display: false } },
-                                y_users: { // Eje Usuarios (izquierdo)
+                                y_users: { 
                                     type: 'linear', display: true, position: 'left',
                                     title: { display: true, text: 'Nº Usuarios', color:'#808080' },
                                     ticks: { color: '#808080' }, grid: { color: 'rgba(200, 200, 200, 0.1)' }
                                 },
-                                y_income: { // Eje Ingresos (derecho)
+                                y_income: { 
                                     type: 'linear', display: true, position: 'right',
                                     title: { display: true, text: 'Ingreso Prom. ($)', color:'#808080' },
-                                    ticks: { color: '#808080' }, grid: { drawOnChartArea: false } // No dibujar grid para el eje derecho
+                                    ticks: { color: '#808080' }, grid: { drawOnChartArea: false } 
                                 }
                             },
                              plugins: { legend: { display: true, position: 'top', labels:{color:'#808080'} }, tooltip:{mode: 'index', intersect: false} }
                         };
-                    } else if (chartType === 'bar' && data.datasets && data.datasets.length > 1) { // Barras Agrupadas (Edad/Género)
-                         chartData = data; // La API ya formatea los datasets
+                    } else if (chartType === 'bar' && data.datasets && data.datasets.length > 1) { 
+                         chartData = data; 
                          chartOptions = { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: false }, y: { stacked: false, beginAtZero: true } }, plugins: { legend: { display: true, position: 'top' } } };
-                    } else if (chartType === 'scatter') { // Scatter Plot (Engagement/Spending)
-                        chartData = data; // API formatea datasets
+                    } else if (chartType === 'scatter') { 
+                        chartData = data; 
                         chartOptions = {
                             responsive: true, maintainAspectRatio: false,
                             scales: {
                                 x: { title: { display: true, text: 'Tiempo Diario en Redes Sociales (Horas)', color:'#808080' }, ticks: { color: '#808080' }, grid: { color: 'rgba(200, 200, 200, 0.1)' } },
                                 y: { title: { display: true, text: 'Gasto Mensual Entretenimiento ($)', color:'#808080' }, ticks: { color: '#808080' }, grid: { color: 'rgba(200, 200, 200, 0.2)' } }
                             },
-                            plugins: { legend: { display: false }, tooltip: { /* Opciones tooltip */ } }
-                        };
-                    } else { // Gráficos simples (Barra simple, Pie, Doughnut)
+                            plugins: { legend: { display: false } }
+                        }; 
+                    } else { 
                         chartData = {
                             labels: data.labels,
                             datasets: [{
-                                label: '# de Usuarios', // Label genérico
+                                label: '# de Usuarios', 
                                 data: data.data,
                                 backgroundColor: chartType === 'bar' ? colors[0] : colors.slice(0, data.labels.length),
                                 borderColor: chartType === 'bar' ? borderColors[0] : borderColors.slice(0, data.labels.length),
@@ -250,21 +243,21 @@
                 });
         }
 
-        // --- Crear gráficos específicos para Dispositivos ---
+
          function createDeviceCharts(apiUrl) {
              fetch(apiUrl)
                  .then(response => response.ok ? response.json() : Promise.reject(`HTTP error! status: ${response.status}`))
                  .then(data => {
                      if (!data || !data.sm_devices || !data.ent_devices) { throw new Error('Invalid device data format'); }
 
-                     // Gráfico Dispositivos SM
+
                      const ctxSm = document.getElementById('smpDeviceSmChart')?.getContext('2d');
                      if(ctxSm && data.sm_devices.labels && data.sm_devices.data.length > 0) {
                           let existingSm = Chart.getChart(ctxSm); if(existingSm) existingSm.destroy();
                           new Chart(ctxSm, { type: 'doughnut', data: { labels: data.sm_devices.labels, datasets: [{ data: data.sm_devices.data, backgroundColor: colors, borderColor: borderColors }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } } });
                      } else if(ctxSm) { ctxSm.fillText('Sin datos', ctxSm.canvas.width / 2, ctxSm.canvas.height / 2); }
 
-                      // Gráfico Dispositivos Entretenimiento
+
                      const ctxEnt = document.getElementById('smpDeviceEntChart')?.getContext('2d');
                       if(ctxEnt && data.ent_devices.labels && data.ent_devices.data.length > 0) {
                           let existingEnt = Chart.getChart(ctxEnt); if(existingEnt) existingEnt.destroy();
@@ -273,39 +266,32 @@
                  })
                  .catch(error => {
                      console.error('Error loading device charts:', error);
-                     // Podrías mostrar error en ambos canvas si falla el fetch
+
                  });
          }
 
-        // --- Llamadas para Renderizar los Gráficos ---
+
         document.addEventListener('DOMContentLoaded', () => {
              setTimeout(() => {
-                // Perfil Audiencia
-                createMarketingChart('smpAgeGenderChart', ageGenderUrl, 'bar'); // Barras agrupadas
+                createMarketingChart('smpAgeGenderChart', ageGenderUrl, 'bar'); 
                 createMarketingChart('smpCountryChart', topCountriesUrl, 'bar');
-                createMarketingChart('smpOccupationIncomeChart', occupationIncomeUrl, 'bar'); // Eje mixto
+                createMarketingChart('smpOccupationIncomeChart', occupationIncomeUrl, 'bar'); 
 
-                // Afinidad e Intención
+
                  createMarketingChart('smpEntertainmentAffinityChart', contentAffinityUrl, 'doughnut');
                  createMarketingChart('smpUserIntentChart', userIntentUrl, 'pie');
 
-                 // Comportamiento y Dispositivos
-                 // Dentro del addEventListener('DOMContentLoaded', () => { setTimeout(() => { ... }); });
 
-// Comportamiento y Dispositivos
-// TIPO DE GRÁFICO CAMBIADO A 'bar':
-                createMarketingChart('smpEngagementSpendingChart', engagementSpendingUrl, 'bar', {}, { // Pasamos {} como defaultOptions si no hay específicas
-                    scales: { // Añadimos configuración de ejes explícita para barra
+                createMarketingChart('smpEngagementSpendingChart', engagementSpendingUrl, 'bar', {}, { 
+                    scales: { 
                         x: { title: { display: true, text: 'Tiempo Diario en Redes Sociales (Rango)', color:'#808080' }, ticks:{color:'#808080'} },
                         y: { title: { display: true, text: 'Gasto Promedio Entretenimiento ($)', color:'#808080' }, ticks:{color:'#808080', callback: function(value) { return '$' + value; }}, beginAtZero: true }
                     },
                 });
-                createDeviceCharts(deviceProfileUrl); // Llamada para gráficos de dispositivos
-        // Aquí podrías añadir más llamadas para otros gráficos si es necesario
-        // Ejemplo de llamada adicional para un gráfico de tendencias
-                createMarketingChart('smpTrendChart', trendDataUrl, 'line'); // Gráfico de líneas para tendencias
+                createDeviceCharts(deviceProfileUrl); 
+                createMarketingChart('smpTrendChart', trendDataUrl, 'line'); 
 
-            }, 200); // Un poco más de retraso por si acaso
+            }, 200); 
         });
     </script>
 

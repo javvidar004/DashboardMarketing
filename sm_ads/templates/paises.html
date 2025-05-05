@@ -4,14 +4,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ country_name }} - Marketing Insights</title>
+    <title>{{ country_name }} - Países en Redes Sociales</title>
     <link href="{% static 'assets/css/bootstrap.css' %}" rel="stylesheet">
     <link href="{% static 'assets/font-awesome/css/font-awesome.css' %}" rel="stylesheet" />
     <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
     <link href="{% static 'assets/css/style-responsive.css' %}" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
      <style>
-        /* Mismos estilos .chart-panel, .metric-panel, .insight-text, h4.chart-title */
         .chart-panel { background-color: #ffffff; border-radius: 4px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding-bottom: 15px; }
         .chart-panel .panel-heading { background-color: #f5f5f5; border-bottom: 1px solid #ddd; padding: 10px 15px; font-weight: 600; border-top-left-radius: 4px; border-top-right-radius: 4px; }
         .chart-panel .panel-body { height: 300px; padding: 15px; }
@@ -63,7 +62,7 @@
       </aside>
       <section id="main-content">
           <section class="wrapper">
-               <h3 style="padding-left: 15px;"><i class="fa fa-angle-right"></i> Marketing Insights para: {{ country_name }}</h3>
+               <h3 style="padding-left: 15px;"><i class="fa fa-angle-right"></i> Información de: {{ country_name }}</h3>
 
                <h4 class="chart-title">Perfil Socio-Económico</h4>
                <div class="row mt">
@@ -71,21 +70,18 @@
                         <div class="chart-panel">
                            <div class="panel-heading">Distribución de Ingresos Mensuales</div>
                            <div class="panel-body"><canvas id="countryIncomeDistChart"></canvas></div>
-                           <div class="insight-text"><i class="fa fa-lightbulb-o"></i> Segmenta por poder adquisitivo.</div>
                        </div>
                    </div>
                     <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="chart-panel">
                            <div class="panel-heading">Distribución Gasto Entretenimiento</div>
                            <div class="panel-body"><canvas id="countrySpendingDistChart"></canvas></div>
-                           <div class="insight-text"><i class="fa fa-lightbulb-o"></i> ¿Disposición a gastar en ocio?</div>
                        </div>
                    </div>
                    <div class="col-lg-4 col-md-12 col-sm-12">
                        <div class="chart-panel">
-                          <div class="panel-heading">Ocupaciones Más Comunes (Top 10)</div>
+                          <div class="panel-heading">Se dedican a:</div>
                           <div class="panel-body"><canvas id="countryOccupationChart"></canvas></div>
-                          <div class="insight-text"><i class="fa fa-lightbulb-o"></i> Adapta ofertas a sectores profesionales.</div>
                       </div>
                    </div>
                </div>
@@ -96,26 +92,23 @@
                        <div class="chart-panel">
                            <div class="panel-heading">Plataformas Sociales Populares</div>
                            <div class="panel-body"><canvas id="countryPlatformChart"></canvas></div>
-                            <div class="insight-text"><i class="fa fa-lightbulb-o"></i> ¿Dónde invertir en publicidad?</div>
                        </div>
                    </div>
                    <div class="col-lg-4 col-md-6 col-sm-12">
                        <div class="chart-panel">
                           <div class="panel-heading">Tipos de Entretenimiento Preferidos</div>
                           <div class="panel-body"><canvas id="countryEntertainmentChart"></canvas></div>
-                          <div class="insight-text"><i class="fa fa-lightbulb-o"></i> Inspira creatividades con contenido local.</div>
                       </div>
                    </div>
                    <div class="col-lg-4 col-md-12 col-sm-12">
                        <div class="chart-panel">
                            <div class="panel-heading">Distribución Habilidad Tecnológica</div>
                            <div class="panel-body"><canvas id="countryTechSavvyChart"></canvas></div>
-                           <div class="insight-text"><i class="fa fa-lightbulb-o"></i> Nivel de digitalización (1=Bajo, 5=Alto).</div>
                        </div>
                    </div>
                </div>
 
-                <h4 class="chart-title">Indicadores de Estilo de Vida (Promedio)</h4>
+                <!-- <h4 class="chart-title">Indicadores de Estilo de Vida</h4>
                 <div class="row mt">
                     <div class="col-lg-3 col-md-6 col-sm-6">
                         <div class="metric-panel">
@@ -147,10 +140,9 @@
                     </div>
                      <div class="col-lg-12">
                          <div class="insight-text" style="text-align: center; margin-top: -10px;">
-                             <i class="fa fa-lightbulb-o"></i> Considera estos factores para campañas de bienestar, tecnología o para entender el nivel de "ruido" digital.
                          </div>
                      </div>
-                </div>
+                </div> -->
 
           </section>
       </section>
@@ -167,7 +159,7 @@
     <script>
         const countryId = {{ country_id }};
 
-        // URLs APIs (Actualizadas)
+
         const incomeDistUrl = `/api/country/${countryId}/income_distribution/`;
         const spendingDistUrl = `/api/country/${countryId}/spending_distribution/`;
         const occupationUrl = `/api/country/${countryId}/occupation_landscape/`;
@@ -176,22 +168,19 @@
         const techSavvyUrl = `/api/country/${countryId}/tech_savviness_distribution/`;
         const lifestyleUrl = `/api/country/${countryId}/lifestyle_indicators/`;
 
-        // Colores
         const colors = ['rgba(78, 205, 196, 0.7)', 'rgba(255, 107, 107, 0.7)', 'rgba(255, 217, 102, 0.7)', 'rgba(84, 160, 255, 0.7)', 'rgba(156, 136, 255, 0.7)', 'rgba(255, 159, 67, 0.7)'];
         const borderColors = colors.map(c => c.replace('0.7', '1'));
 
-        // Función genérica para gráficos
         function createCountryChart(canvasId, apiUrl, chartType, defaultOptions = {}) {
              const ctx = document.getElementById(canvasId);
             if (!ctx) { console.error(`Canvas ${canvasId} not found.`); return; }
             const chartContext = ctx.getContext('2d');
 
             fetch(apiUrl)
-                .then(response => response.ok ? response.json() : Promise.reject(new Error(`HTTP error ${response.status} for ${apiUrl}`))) // Añadir URL al error
+                .then(response => response.ok ? response.json() : Promise.reject(new Error(`HTTP error ${response.status} for ${apiUrl}`))) 
+
                 .then(data => {
-                    // Permitir datasets vacíos pero con estructura válida
                     if (!data || (!data.labels && !data.datasets)) { throw new Error('Invalid data format'); }
-                    // Si labels existe pero está vacío, mostrar mensaje
                     if (data.labels && data.labels.length === 0 && (!data.datasets || data.datasets.length === 0 || data.datasets[0].data.length === 0) ) {
                          throw new Error('No data available');
                     }
@@ -201,7 +190,6 @@
                     if (existingChart) { existingChart.destroy(); }
 
                     let chartData, chartOptions = {};
-                     // Configuración simplificada para bar, pie, doughnut
                     chartData = {
                         labels: data.labels,
                         datasets: [{
@@ -217,29 +205,26 @@
 
                     new Chart(chartContext, { type: chartType, data: chartData, options: { ...chartOptions, ...defaultOptions } });
                 })
-                .catch(error => { // Mostrar error en el canvas
-                    console.error(`Error for ${canvasId}:`, error); // Loguear el error completo
+                .catch(error => { 
+                    console.error(`Error for ${canvasId}:`, error); 
                     chartContext.font = '14px Arial'; chartContext.fillStyle = '#dc3545'; chartContext.textAlign = 'center';
                     chartContext.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
                     chartContext.fillText(`${error.message || 'Error loading chart'}`, ctx.canvas.width / 2, ctx.canvas.height / 2);
                 });
         }
 
-
-        // Función para cargar métricas (Revisada con logs)
         function loadLifestyleMetrics(apiUrl) {
-            console.log("Fetching lifestyle data from:", apiUrl); // Log para ver URL
+            console.log("Fetching lifestyle data from:", apiUrl); 
             fetch(apiUrl)
                 .then(response => {
-                    console.log("Lifestyle API Response Status:", response.status); // Log status
+                    console.log("Lifestyle API Response Status:", response.status); 
                     if (!response.ok) {
                         throw new Error(`HTTP error ${response.status}`);
                     }
                     return response.json();
                 })
                 .then(data => {
-                    console.log("Lifestyle API Data Received:", data); // Log para ver datos
-                    // Asegurarse que los elementos existen antes de asignar
+                    console.log("Lifestyle API Data Received:", data); 
                     const sleepEl = document.getElementById('metric_sleep');
                     const activityEl = document.getElementById('metric_activity');
                     const notificationsEl = document.getElementById('metric_notifications');
@@ -251,7 +236,7 @@
                     if(techEl) techEl.textContent = data.avg_tech_savviness !== 'N/A' ? data.avg_tech_savviness : '--'; else console.error("Element #metric_tech not found");
                 })
                 .catch(error => {
-                    console.error('Error loading lifestyle metrics:', error); // Log detallado del error
+                    console.error('Error loading lifestyle metrics:', error); 
                      ['metric_sleep', 'metric_activity', 'metric_notifications', 'metric_tech'].forEach(id => {
                         const el = document.getElementById(id);
                         if(el) el.textContent = '--';
@@ -259,24 +244,19 @@
                 });
         }
 
-
-        // --- Llamadas para Renderizar (Actualizadas) ---
         document.addEventListener('DOMContentLoaded', () => {
              setTimeout(() => {
-                 // Socio-Económico
                  createCountryChart('countryIncomeDistChart', incomeDistUrl, 'bar');
                  createCountryChart('countrySpendingDistChart', spendingDistUrl, 'bar');
                  createCountryChart('countryOccupationChart', occupationUrl, 'bar');
 
-                 // Consumo Medios y Tecnología
                  createCountryChart('countryPlatformChart', topPlatformsUrl, 'pie');
                  createCountryChart('countryEntertainmentChart', topEntertainmentUrl, 'pie');
-                 createCountryChart('countryTechSavvyChart', techSavvyUrl, 'bar'); // Nuevo gráfico
+                 createCountryChart('countryTechSavvyChart', techSavvyUrl, 'bar');
 
-                 // Estilo de Vida (Cargar métricas)
                  loadLifestyleMetrics(lifestyleUrl);
 
-            }, 200); // Retraso
+            }, 200); // retraso para que todo esté ya cargadio
         });
     </script>
 
